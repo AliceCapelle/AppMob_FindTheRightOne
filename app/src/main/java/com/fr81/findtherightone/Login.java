@@ -23,11 +23,19 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+// TODO: 09/05/2018 Write log in external file
 public class Login extends AppCompatActivity {
 
     private EditText etEmail;
     private EditText etPassword;
 
+
+    /**
+     * Main UI thread. We set the view, and get the text entered when the button
+     * is clicked. We launch an asynctask (a thread), who run in the background and connect to
+     * database
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,8 +51,6 @@ public class Login extends AppCompatActivity {
                 final String mail = etEmail.getText().toString();
                 final String password = etPassword.getText().toString();
                 new AsyncLogin().execute(mail,password);;
-                Log.i("mail", mail);
-                Log.i("password", password);
             }
         });
 
@@ -53,30 +59,39 @@ public class Login extends AppCompatActivity {
     }
 
 
-
+    /**
+     * Inner class who extend AsyncTask. Start a thread when called.
+     */
     private class AsyncLogin extends AsyncTask<String, String, String>
     {
 
+        /**
+         * First methode called when class is called. Performs task in the background.
+         * Here, she send a post request to our server, in order to login.
+         * She then retrieve string send with echo by php.
+         * @param params username and password entered by user.
+         * @return string of server answer.
+         */
         @Override
         protected String doInBackground(String... params) {
-            final int CONNECTION_TIMEOUT = 10000;
-            final int READ_TIMEOUT = 15000;
+
+            BackendConnection b = new BackendConnection();
             HttpURLConnection conn = null;
 
-            URL url = null;
             try {
-                url = new URL("https://tinder.student.elwinar.com/controller/login.php");
-                conn = (HttpURLConnection) url.openConnection();
-                conn.setReadTimeout(READ_TIMEOUT);
-                conn.setConnectTimeout(CONNECTION_TIMEOUT);
-                conn.setRequestMethod("POST");
-                conn.setDoInput(true);
-                conn.setDoOutput(true);
+                conn = b.connect("https://tinder.student.elwinar.com/controller/login.php","POST");
+                Log.i("doinbackground", "doInBackground: connect is over");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            try{
                 Uri.Builder builder = new Uri.Builder()
                         .appendQueryParameter("mail", params[0])
                         .appendQueryParameter("password", params[1]);
                 String query = builder.build().getEncodedQuery();
 
+                //de là
                 OutputStream os = conn.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(
                         new OutputStreamWriter(os, "UTF-8"));
@@ -85,14 +100,20 @@ public class Login extends AppCompatActivity {
                 writer.close();
                 os.close();
                 conn.connect();
+                //à la, on oeut faire une méthode (envoyer les infos, prend conn en paramètre, void)
 
             } catch (MalformedURLException e) {
+                Toast.makeText(Login.this, "Bad codding :  URL of server's page not " +
+                        "working", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
+
             } catch (IOException e) {
+                Toast.makeText(Login.this, "failed or interrupted I/O operations",
+                        Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
 
-
+            //de là
             int response_code = 0;
             try {
                 response_code = conn.getResponseCode();
@@ -124,15 +145,22 @@ public class Login extends AppCompatActivity {
                 }
 
             }
+            //à la, fonction (prend conn en paramètre, renvoit string
 
             Log.i("Login", "doInBackground: we're done");
             Log.i("Login", result.toString());
             return (result.toString());
         }
 
+        /**
+         * Method execute once doInBackground is done.
+         * Does not require calling.
+         * @param result Responce receive from the server, either "OK", "FIRST" or "FAIL"
+         */
+        // TODO: 09/05/2018  if "OK", we lauch swipe, if "FIRST", we lauch adj, if "FAIL", we display error
         @Override
         protected void onPostExecute(String result) {
-            Toast.makeText(Login.this, result, Toast.LENGTH_LONG);
+            Toast.makeText(Login.this, result, Toast.LENGTH_LONG).show();
             Log.i("Login", "onPostExecute: over");
         }
 
@@ -140,70 +168,7 @@ public class Login extends AppCompatActivity {
 
 
 
-    }
-            /**
-             * https://developer.android.com/reference/java/net/HttpURLConnection
-             * Method that send username and password to the API.
-             * @param username string of the entered username
-             * @param password string of the entered password
-             * @return Server send us back a string "OK", "FIRST" or "FAIL"
-             */
-    /*public String postLogin(String username, String password) throws IOException {
-        final int CONNECTION_TIMEOUT = 10000;
-        final int READ_TIMEOUT = 15000;
-        HttpURLConnection conn = null;
-
-        URL url = null;
-        try {
-            url = new URL("https://tinder.student.elwinar.com/controller/login.php");
-            conn = (HttpURLConnection) url.openConnection();
-            conn.setReadTimeout(READ_TIMEOUT);
-            conn.setConnectTimeout(CONNECTION_TIMEOUT);
-            conn.setRequestMethod("POST");
-            conn.setDoInput(true);
-            conn.setDoOutput(true);
-            Uri.Builder builder = new Uri.Builder()
-                    .appendQueryParameter("mail", username)
-                    .appendQueryParameter("password", password);
-            String query = builder.build().getEncodedQuery();
-
-            OutputStream os = conn.getOutputStream();
-            BufferedWriter writer = new BufferedWriter(
-                    new OutputStreamWriter(os, "UTF-8"));
-            writer.write(query);
-            writer.flush();
-            writer.close();
-            os.close();
-            conn.connect();
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+}
 
 
-        int response_code = conn.getResponseCode();
-        StringBuilder result = null;
-        // Check if successful connection made
-        if (response_code == HttpURLConnection.HTTP_OK) {
-            InputStream input = null;
-            try {
-                input = conn.getInputStream();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-            result = new StringBuilder();
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                result.append(line);
-            }
-
-
-        }
-        return (result.toString());
-
-    }*/
 
