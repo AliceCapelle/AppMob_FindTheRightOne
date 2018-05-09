@@ -1,5 +1,8 @@
 package com.fr81.findtherightone;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -28,6 +31,7 @@ public class Login extends AppCompatActivity {
 
     private EditText etEmail;
     private EditText etPassword;
+    BackendConnection b = new BackendConnection();
 
     /**
      * Main UI thread. We set the view, and get the text entered when the button
@@ -50,12 +54,22 @@ public class Login extends AppCompatActivity {
                 final String mail = etEmail.getText().toString();
                 final String password = etPassword.getText().toString();
 
-                // TODO: 09/05/2018 check if connected to network 
-                
-                new AsyncLogin().execute(mail, password);
+                if(isOnline()){
+                    new AsyncLogin().execute(mail, password);
+                }
+                else{
+                    Toast.makeText(Login.this, "No internet acces", Toast.LENGTH_LONG).show();
+                }
                 
             }
         });
+    }
+
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
 
@@ -74,7 +88,7 @@ public class Login extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
 
-            BackendConnection b = new BackendConnection();
+
             HttpURLConnection conn = null;
             String result = null;
 
@@ -98,7 +112,7 @@ public class Login extends AppCompatActivity {
          * Does not require calling.
          * @param result Responce receive from the server, either "OK", "FIRST" or "FAIL"
          */
-        // TODO: 09/05/2018  if "OK", we lauch swipe, if "FIRST", we lauch adj, if "FAIL", we display error
+        // TODO: 09/05/2018  if "OK", we launch swipe, if "FIRST", we lauch adj, if "FAIL", we display error
         @Override
         protected void onPostExecute(String result) {
             Toast.makeText(Login.this, result, Toast.LENGTH_LONG).show();
