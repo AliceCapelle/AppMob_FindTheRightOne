@@ -29,7 +29,6 @@ public class Login extends AppCompatActivity {
     private EditText etEmail;
     private EditText etPassword;
 
-
     /**
      * Main UI thread. We set the view, and get the text entered when the button
      * is clicked. We launch an asynctask (a thread), who run in the background and connect to
@@ -47,29 +46,26 @@ public class Login extends AppCompatActivity {
         Button button = (Button) findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 final String mail = etEmail.getText().toString();
                 final String password = etPassword.getText().toString();
-                new AsyncLogin().execute(mail,password);;
+                new AsyncLogin().execute(mail, password);
+                ;
             }
         });
-
-
-
     }
 
 
+    /**********************************************************************************************/
     /**
      * Inner class who extend AsyncTask. Start a thread when called.
      */
-    private class AsyncLogin extends AsyncTask<String, String, String>
-    {
+    private class AsyncLogin extends AsyncTask<String, String, String> {
 
         /**
          * First methode called when class is called. Performs task in the background.
-         * Here, she send a post request to our server, in order to login.
-         * She then retrieve string send with echo by php.
-         * @param params username and password entered by user.
+         * Send a post request to our server, in order to login
+         * @param params username and password entered by user
          * @return string of server answer.
          */
         @Override
@@ -77,79 +73,21 @@ public class Login extends AppCompatActivity {
 
             BackendConnection b = new BackendConnection();
             HttpURLConnection conn = null;
+            String result = null;
 
             try {
-                conn = b.connect("https://tinder.student.elwinar.com/controller/login.php","POST");
-                Log.i("doinbackground", "doInBackground: connect is over");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            try{
+                conn = b.connect("https://tinder.student.elwinar.com/controller/login.php", "POST");
                 Uri.Builder builder = new Uri.Builder()
                         .appendQueryParameter("mail", params[0])
                         .appendQueryParameter("password", params[1]);
+
                 String query = builder.build().getEncodedQuery();
-
-                //de là
-                OutputStream os = conn.getOutputStream();
-                BufferedWriter writer = new BufferedWriter(
-                        new OutputStreamWriter(os, "UTF-8"));
-                writer.write(query);
-                writer.flush();
-                writer.close();
-                os.close();
-                conn.connect();
-                //à la, on oeut faire une méthode (envoyer les infos, prend conn en paramètre, void)
-
-            } catch (MalformedURLException e) {
-                Toast.makeText(Login.this, "Bad codding :  URL of server's page not " +
-                        "working", Toast.LENGTH_SHORT).show();
-                e.printStackTrace();
-
-            } catch (IOException e) {
-                Toast.makeText(Login.this, "failed or interrupted I/O operations",
-                        Toast.LENGTH_SHORT).show();
-                e.printStackTrace();
-            }
-
-            //de là
-            int response_code = 0;
-            try {
-                response_code = conn.getResponseCode();
+                b.sendData(conn, query);
+                result = b.getData(conn);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            StringBuilder result = null;
-            // Check if successful connection made
-            if (response_code == HttpURLConnection.HTTP_OK) {
-                InputStream input = null;
-                try {
-                    input = conn.getInputStream();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-                result = new StringBuilder();
-                String line;
-
-                try {
-                    while ((line = reader.readLine()) != null) {
-                        result.append(line);
-                    }
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-
-
-                }
-
-            }
-            //à la, fonction (prend conn en paramètre, renvoit string
-
-            Log.i("Login", "doInBackground: we're done");
-            Log.i("Login", result.toString());
-            return (result.toString());
+            return result;
         }
 
         /**
@@ -165,7 +103,6 @@ public class Login extends AppCompatActivity {
         }
 
     }
-
 
 
 }
