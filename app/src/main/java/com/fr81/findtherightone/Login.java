@@ -44,32 +44,23 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        etEmail = (EditText) findViewById(R.id.etMailL);
-        etPassword = (EditText) findViewById(R.id.etPasswordL);
+        etEmail = findViewById(R.id.etMailL);
+        etPassword = findViewById(R.id.etPasswordL);
 
-        Button button = (Button) findViewById(R.id.okLoginButton);
+        Button button = findViewById(R.id.okLoginButton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final String mail = etEmail.getText().toString();
                 final String password = etPassword.getText().toString();
-
-                if(isOnline()){
+                if (b.isOnline((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))) {
                     new AsyncLogin().execute(mail, password);
+                } else {
+                    Toast.makeText(Login.this, "No internet access", Toast.LENGTH_LONG).show();
                 }
-                else{
-                    Toast.makeText(Login.this, "No internet acces", Toast.LENGTH_LONG).show();
-                }
-                
+
             }
         });
-    }
-
-    public boolean isOnline() {
-        ConnectivityManager cm =
-                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
 
@@ -82,6 +73,7 @@ public class Login extends AppCompatActivity {
         /**
          * First methode called when class is called. Performs task in the background.
          * Send a post request to our server, in order to login
+         *
          * @param params username and password entered by user
          * @return string of server answer.
          */
@@ -110,13 +102,13 @@ public class Login extends AppCompatActivity {
         /**
          * Method execute once doInBackground is done.
          * Does not require calling.
+         *
          * @param result Responce receive from the server, either "OK", "FIRST" or "FAIL"
          */
         // TODO: 09/05/2018  if "OK", we launch swipe, if "FIRST", we lauch adj, if "FAIL", we display error
         @Override
         protected void onPostExecute(String result) {
             Toast.makeText(Login.this, result, Toast.LENGTH_LONG).show();
-            Log.i("Login", "onPostExecute: over");
         }
 
     }

@@ -26,6 +26,16 @@ import java.net.URL;
 public class BackendConnection {
 
 
+    /**
+     * Check is network is available to perform server request
+     * @param c object who give state of network connectivity
+     * @return
+     */
+    public static boolean isOnline(ConnectivityManager c) {
+        ConnectivityManager cm = c;
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
+    }
 
     /**
      * Initialize request to server

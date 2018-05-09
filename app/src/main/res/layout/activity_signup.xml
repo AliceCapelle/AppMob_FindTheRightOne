@@ -27,8 +27,32 @@
         android:id="@+id/okSignupButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etPasswordSU"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="61dp"
+        android:layout_marginBottom="73dp"
         android:text="Sign up" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupYear"
+        android:layout_width="wrap_content"
+        android:layout_height="110dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="146dp">
+
+        <RadioButton
+            android:id="@+id/radioButtonDUT1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="DUT 1" />
+
+        <RadioButton
+            android:id="@+id/radioButtonDUT2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="DUT 2"
+            />
+    </RadioGroup>
 </RelativeLayout>
