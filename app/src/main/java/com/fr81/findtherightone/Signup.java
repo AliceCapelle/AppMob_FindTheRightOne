@@ -1,6 +1,7 @@
 package com.fr81.findtherightone;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -22,6 +23,11 @@ import java.net.HttpURLConnection;
  */
 
 public class Signup extends AppCompatActivity {
+
+    public static final String LOGIN    = "fr81.signup.login";
+    public static final String PASSWD   = "fr81.signup.passwd";
+    public static final String YEAR     = "fr81.signup.year";
+
     private EditText etEmail;
     private EditText etPassword;
     private RadioGroup rgYear;
@@ -52,7 +58,7 @@ public class Signup extends AppCompatActivity {
                 else
                     year = "2";
                 if (b.isOnline((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))) {
-                    new Signup.AsyncSignup().execute(mail, password, year);
+                    new Signup.AsyncSignup(mail, password, year).execute();
                 } else {
                     Toast.makeText(Signup.this, "No internet access", Toast.LENGTH_LONG).show();
                 }
@@ -63,6 +69,17 @@ public class Signup extends AppCompatActivity {
 
     private class AsyncSignup extends AsyncTask<String, String, String> {
 
+        private String mail;
+        private String passwd;
+        private String year;
+
+        public AsyncSignup(String mail, String passwd, String year){
+            super();
+            this.mail = mail;
+            this.passwd = passwd;
+            this.year = year;
+        }
+
         @Override
         protected String doInBackground(String... params) {
 
@@ -72,7 +89,7 @@ public class Signup extends AppCompatActivity {
             try {
                 conn = b.connect("https://tinder.student.elwinar.com/controller/student_exists.php", "POST");
                 Uri.Builder builder = new Uri.Builder()
-                        .appendQueryParameter("mail", params[0]);
+                        .appendQueryParameter("mail", mail);
 
                 String query = builder.build().getEncodedQuery();
                 b.sendData(conn, query);
@@ -85,7 +102,15 @@ public class Signup extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
-            Toast.makeText(Signup.this, result, Toast.LENGTH_LONG).show();
+            if(result.equals("OK")){
+                Intent i = new Intent(Signup.this, RegistrationConfirmation.class);
+                i.putExtra(Signup.LOGIN, mail);
+                i.putExtra(Signup.PASSWD, passwd);
+                i.putExtra(Signup.YEAR, year);
+                startActivity(i);
+            }
+            else
+                Toast.makeText(Signup.this, "Une erreur est survenue...", Toast.LENGTH_LONG).show();
         }
     }
 
