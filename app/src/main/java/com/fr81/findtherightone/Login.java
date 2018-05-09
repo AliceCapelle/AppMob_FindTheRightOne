@@ -40,17 +40,20 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        etEmail = (EditText) findViewById(R.id.mail);
-        etPassword = (EditText) findViewById(R.id.password);
+        etEmail = (EditText) findViewById(R.id.etMailL);
+        etPassword = (EditText) findViewById(R.id.etPasswordL);
 
-        Button button = (Button) findViewById(R.id.button);
+        Button button = (Button) findViewById(R.id.okLoginButton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final String mail = etEmail.getText().toString();
                 final String password = etPassword.getText().toString();
+
+                // TODO: 09/05/2018 check if connected to network 
+                
                 new AsyncLogin().execute(mail, password);
-                ;
+                
             }
         });
     }
