@@ -1,6 +1,8 @@
 package com.fr81.findtherightone;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -31,7 +33,11 @@ public class Login extends AppCompatActivity {
 
     private EditText etEmail;
     private EditText etPassword;
+    private String userMail;
     BackendConnection b = new BackendConnection();
+    private static final String PREFS_MAIL = "PREFS_MAIL";
+    SharedPreferences sharedPreferences;
+    private static final String PREFS = "PREFS";
 
     /**
      * Main UI thread. We set the view, and get the text entered when the button
@@ -53,6 +59,7 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 final String mail = etEmail.getText().toString();
                 final String password = etPassword.getText().toString();
+                userMail = mail;
                 if (b.isOnline((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))) {
                     new AsyncLogin().execute(mail, password);
                 } else {
@@ -108,6 +115,22 @@ public class Login extends AppCompatActivity {
         // TODO: 09/05/2018  if "OK", we launch swipe, if "FIRST", we lauch adj, if "FAIL", we display error
         @Override
         protected void onPostExecute(String result) {
+            if(result.equals("OK")){
+
+                sharedPreferences = getBaseContext().getSharedPreferences(PREFS, MODE_PRIVATE);
+
+                if (!sharedPreferences.contains(PREFS_MAIL)) {
+                    sharedPreferences
+                            .edit()
+                            .putString(PREFS_MAIL, userMail)
+                            .apply();
+
+                }
+
+                Intent i = new Intent(Login.this, Profil.class);
+                startActivity(i);
+            }
+
             Toast.makeText(Login.this, result, Toast.LENGTH_LONG).show();
         }
 
