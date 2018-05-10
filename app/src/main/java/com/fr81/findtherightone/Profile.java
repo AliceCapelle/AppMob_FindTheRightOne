@@ -8,14 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.IOException;
 import java.net.HttpURLConnection;
 
-public class Profil extends AppCompatActivity {
+public class Profile extends AppCompatActivity {
 
     BackendConnection b = new BackendConnection();
     TextView description;
@@ -24,13 +20,13 @@ public class Profil extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profil);
+        setContentView(R.layout.activity_profile);
 
         description = findViewById(R.id.tvDescription);
         sharedPreferences = getBaseContext().getSharedPreferences("PREFS", MODE_PRIVATE);
         String mail = sharedPreferences.getString("PREFS_MAIL", null);
         Log.i("oncreate", mail);
-        new Profil.AsyncProfil().execute(mail);
+        new Profile.AsyncProfil().execute(mail);
     }
 
 

@@ -22,7 +22,7 @@
         <activity android:name=".Login" />
         <activity android:name=".Signup" />
         <activity android:name=".RegistrationConfirmation"></activity>
-        <activity android:name=".Profil"></activity>
+        <activity android:name=".Profile"></activity>
     </application>
 
 </manifest>

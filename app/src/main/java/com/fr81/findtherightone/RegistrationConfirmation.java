@@ -68,14 +68,10 @@ public class RegistrationConfirmation extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
-            //TODO : Add result in backend in order to know if the mail has been succesfully sent
-            /*
             if(result.equals("OK"))
                 txtResult.setText("Un mail a ete envoye a " + mail + " !");
             else
                 txtResult.setText("Une erreur est survenue...");
-             */
-            txtResult.setText("Un mail a ete envoye a " + mail + " !");
         }
     }
 
