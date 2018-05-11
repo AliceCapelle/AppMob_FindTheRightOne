@@ -89,8 +89,7 @@ public class Profile extends AppCompatActivity {
          */
         @Override
         protected void onPostExecute(String result) {
-
-            //pour récupérer un atribut spécifique du student
+            
             try {
                 JSONObject json = new JSONObject(result.toString());
                 JSONObject student = json.getJSONObject("student");
@@ -112,42 +111,11 @@ public class Profile extends AppCompatActivity {
 
                 Picasso.get().load("http://tinder.student.elwinar.com" + picPath).into(imgProfile);
 
-                /*new DownloadImageTask((ImageView) findViewById(R.id.imgProfile))
-                        .execute("http://tinder.student.elwinar.com" + picPath);*/
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    /*private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-
-        ImageView bmImage;
-
-        public DownloadImageTask(ImageView bmImage) {
-            this.bmImage = bmImage;
-        }
-
-        protected Bitmap doInBackground(String... urls) {
-
-            Bitmap img = null;
-
-
-            try {
-                URL url = new URL(urls[0]);
-                img = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-            } catch (Exception e) {
-                Log.e("Error", e.getMessage());
-            }
-
-            if (img == null)
-                Log.i("IMG", "Est null..");
-            return img;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            bmImage.setImageBitmap(result);
-        }
-    }*/
 
 }
