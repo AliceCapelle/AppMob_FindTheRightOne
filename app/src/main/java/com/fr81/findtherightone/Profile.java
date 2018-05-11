@@ -1,32 +1,23 @@
 package com.fr81.findtherightone;
 
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
+
 
 public class Profile extends AppCompatActivity {
 
@@ -37,11 +28,15 @@ public class Profile extends AppCompatActivity {
     private TextView tvMatch;
     private ImageView imgProfile;
     private SharedPreferences sharedPreferences;
+    ProgressBar p;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        p = findViewById(R.id.pBProfile);
+        p.setVisibility(View.VISIBLE);
 
         tvDescription = findViewById(R.id.tvDescription);
         tvName = findViewById(R.id.tvName);
@@ -51,8 +46,12 @@ public class Profile extends AppCompatActivity {
 
         sharedPreferences = getBaseContext().getSharedPreferences("PREFS", MODE_PRIVATE);
         String mail = sharedPreferences.getString("PREFS_MAIL", null);
+
         new Profile.AsyncProfil().execute(mail);
+
+
     }
+
 
 
     private class AsyncProfil extends AsyncTask<String, String, String> {
@@ -89,7 +88,7 @@ public class Profile extends AppCompatActivity {
          */
         @Override
         protected void onPostExecute(String result) {
-            
+
             try {
                 JSONObject json = new JSONObject(result.toString());
                 JSONObject student = json.getJSONObject("student");
@@ -109,7 +108,17 @@ public class Profile extends AppCompatActivity {
                 picPath = picPath.replace("..", "");
                 Log.i("PICTURE", "http://tinder.student.elwinar.com" + picPath);
 
-                Picasso.get().load("http://tinder.student.elwinar.com" + picPath).into(imgProfile);
+                Picasso.get().load("http://tinder.student.elwinar.com" + picPath).into(imgProfile, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        p.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+
+                    }
+                });
 
             } catch (JSONException e) {
                 e.printStackTrace();
