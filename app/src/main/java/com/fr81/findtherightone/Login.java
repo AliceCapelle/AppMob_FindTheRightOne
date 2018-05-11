@@ -22,7 +22,7 @@ public class Login extends AppCompatActivity {
     private EditText etEmail;
     private EditText etPassword;
     private String userMail;
-    BackendConnection b = new BackendConnection();
+    private BackendConnection b;
     private static final String PREFS_MAIL = "PREFS_MAIL";
     SharedPreferences sharedPreferences;
     private static final String PREFS = "PREFS";
@@ -68,7 +68,6 @@ public class Login extends AppCompatActivity {
         /**
          * First methode called when class is called. Performs task in the background.
          * Send a post request to our server, in order to login
-         *
          * @param params username and password entered by user
          * @return string of server answer.
          */
@@ -97,14 +96,13 @@ public class Login extends AppCompatActivity {
         /**
          * Method execute once doInBackground is done.
          * Does not require calling.
-         *
          * @param result Responce receive from the server, either "OK", "FIRST" or "FAIL"
          */
         // TODO: 09/05/2018  if "OK", we launch swipe, if "FIRST", we lauch adj, if "FAIL", we display error
         @Override
         protected void onPostExecute(String result) {
             if(result.equals("OK")){
-
+                Toast.makeText(Login.this, result, Toast.LENGTH_LONG).show();
                 sharedPreferences = getBaseContext().getSharedPreferences(PREFS, MODE_PRIVATE);
 
                 if (!sharedPreferences.contains(PREFS_MAIL)) {
@@ -118,8 +116,10 @@ public class Login extends AppCompatActivity {
                 Intent i = new Intent(Login.this, Profile.class);
                 startActivity(i);
             }
+            else{
+                Toast.makeText(Login.this, result , Toast.LENGTH_LONG).show();
+            }
 
-            Toast.makeText(Login.this, result, Toast.LENGTH_LONG).show();
         }
 
     }
