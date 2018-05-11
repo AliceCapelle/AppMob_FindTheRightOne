@@ -6,6 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+/**
+ * Activity for home page who is launch when app is open.
+ * From there we can got to login and sign up.
+ */
+
 public class Home extends AppCompatActivity implements View.OnClickListener {
 
     @Override
@@ -18,7 +23,6 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
 
         login.setOnClickListener(this);
         signup.setOnClickListener(this);
-
 
     }
 

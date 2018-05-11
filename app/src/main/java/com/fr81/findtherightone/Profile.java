@@ -25,18 +25,21 @@ public class Profile extends AppCompatActivity {
         description = findViewById(R.id.tvDescription);
         sharedPreferences = getBaseContext().getSharedPreferences("PREFS", MODE_PRIVATE);
         String mail = sharedPreferences.getString("PREFS_MAIL", null);
-        Log.i("oncreate", mail);
         new Profile.AsyncProfil().execute(mail);
     }
 
 
     private class AsyncProfil extends AsyncTask<String, String, String> {
 
+        /**
+         * Call server with post request to retrieve all info needed for the connected student
+         * @param params take mail of student
+         * @return
+         */
         @Override
         protected String doInBackground(String... params) {
             HttpURLConnection conn = null;
             String result = "fail";
-            Log.i("async result 0", result);
 
             try {
                 conn = b.connect("https://tinder.student.elwinar.com/controller/updateprofile.php", "POST");
@@ -54,6 +57,10 @@ public class Profile extends AppCompatActivity {
             return result;
         }
 
+        /**
+         * Decode json and get element to feed UI
+         * @param result string with all student info
+         */
         @Override
         protected void onPostExecute(String result) {
 

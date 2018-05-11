@@ -80,6 +80,11 @@ public class Signup extends AppCompatActivity {
             this.year = year;
         }
 
+        /**
+         * Request server to know if mail is already used or not
+         * @param params mail
+         * @return
+         */
         @Override
         protected String doInBackground(String... params) {
 

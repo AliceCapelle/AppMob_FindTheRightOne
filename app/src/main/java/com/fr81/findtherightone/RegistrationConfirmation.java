@@ -44,6 +44,11 @@ public class RegistrationConfirmation extends AppCompatActivity {
 
     private class AsyncRegister extends AsyncTask<String, String, String> {
 
+        /**
+         * Request server to add student to db and send email
+         * @param params mail, password and year
+         * @return
+         */
         @Override
         protected String doInBackground(String... params) {
 

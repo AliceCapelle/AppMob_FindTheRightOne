@@ -19,7 +19,6 @@ import java.net.ProtocolException;
 import java.net.URL;
 
 /**
- * Created by acapelle on 09/05/2018.
  * Simple class to help make request to server
  */
 
@@ -39,7 +38,6 @@ public class BackendConnection {
 
     /**
      * Initialize request to server
-     *
      * @param link    URL of server page we call
      * @param methode GET or POST
      * @return HttpURLConnection
