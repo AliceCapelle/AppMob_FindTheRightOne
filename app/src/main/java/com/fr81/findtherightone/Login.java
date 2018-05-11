@@ -112,7 +112,13 @@ public class Login extends AppCompatActivity {
                             .apply();
 
                 }
-
+                else{
+                    getSharedPreferences(PREFS, 0).edit().clear().commit();
+                    sharedPreferences
+                            .edit()
+                            .putString(PREFS_MAIL, userMail)
+                            .apply();
+                }
                 Intent i = new Intent(Login.this, Profile.class);
                 startActivity(i);
             }

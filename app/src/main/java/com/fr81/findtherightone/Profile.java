@@ -3,6 +3,7 @@ package com.fr81.findtherightone;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,15 +11,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 
 public class Profile extends AppCompatActivity {
@@ -103,15 +110,17 @@ public class Profile extends AppCompatActivity {
                 picPath = picPath.replace("..", "");
                 Log.i("PICTURE", "http://tinder.student.elwinar.com" + picPath);
 
-                new DownloadImageTask((ImageView) findViewById(R.id.imgProfile))
-                        .execute("http://tinder.student.elwinar.com" + picPath);
+                Picasso.get().load("http://tinder.student.elwinar.com" + picPath).into(imgProfile);
+
+                /*new DownloadImageTask((ImageView) findViewById(R.id.imgProfile))
+                        .execute("http://tinder.student.elwinar.com" + picPath);*/
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+    /*private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 
         ImageView bmImage;
 
@@ -122,6 +131,7 @@ public class Profile extends AppCompatActivity {
         protected Bitmap doInBackground(String... urls) {
 
             Bitmap img = null;
+
 
             try {
                 URL url = new URL(urls[0]);
@@ -138,5 +148,6 @@ public class Profile extends AppCompatActivity {
         protected void onPostExecute(Bitmap result) {
             bmImage.setImageBitmap(result);
         }
-    }
+    }*/
+
 }

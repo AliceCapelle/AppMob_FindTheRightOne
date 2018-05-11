@@ -50,7 +50,7 @@ public class Signup extends AppCompatActivity {
             public void onClick(View v) {
                 final String mail = etEmail.getText().toString();
                 final String password = etPassword.getText().toString();
-                final String year;
+                String year;
                 int selectedId = rgYear.getCheckedRadioButtonId();
                 rbYear = findViewById(selectedId);
                 if (rbYear.getText().equals("DUT1"))
