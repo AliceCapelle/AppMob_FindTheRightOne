@@ -22,7 +22,7 @@ public class Login extends AppCompatActivity {
     private EditText etEmail;
     private EditText etPassword;
     private String userMail;
-    BackendConnection b = new BackendConnection();
+    private BackendConnection b;
     private static final String PREFS_MAIL = "PREFS_MAIL";
     SharedPreferences sharedPreferences;
     private static final String PREFS = "PREFS";

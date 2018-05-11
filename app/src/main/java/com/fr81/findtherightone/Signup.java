@@ -32,7 +32,8 @@ public class Signup extends AppCompatActivity {
     private EditText etPassword;
     private RadioGroup rgYear;
     private RadioButton rbYear;
-    private BackendConnection b = new BackendConnection();
+    private BackendConnection b;
+    private CheckForm c;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,6 @@ public class Signup extends AppCompatActivity {
         etEmail = findViewById(R.id.etMailSU);
         etPassword = findViewById(R.id.etPasswordSU);
         rgYear = findViewById(R.id.radioGroupYear);
-
 
         Button button = findViewById(R.id.okSignupButton);
         button.setOnClickListener(new View.OnClickListener() {
@@ -57,12 +57,17 @@ public class Signup extends AppCompatActivity {
                     year = "1";
                 else
                     year = "2";
-                if (b.isOnline((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))) {
-                    new Signup.AsyncSignup(mail, password, year).execute();
-                } else {
-                    Toast.makeText(Signup.this, "No internet access", Toast.LENGTH_LONG).show();
-                }
 
+                if(c.checkEmail(mail) && c.checkPassword(password)){
+                    if (b.isOnline((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))) {
+                        new Signup.AsyncSignup(mail, password, year).execute();
+                    } else {
+                        Toast.makeText(Signup.this, "No internet access", Toast.LENGTH_LONG).show();
+                    }
+                }
+                else{
+                    Toast.makeText(Signup.this, "Mot de passe ou adresse mail non valide", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }

@@ -19,7 +19,7 @@ public class RegistrationConfirmation extends AppCompatActivity {
     protected String passwd;
     protected String year;
     protected TextView txtResult;
-    private BackendConnection backend = new BackendConnection();
+    private BackendConnection backend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
