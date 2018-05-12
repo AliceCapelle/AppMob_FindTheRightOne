@@ -49,21 +49,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         buttonHome.setOnClickListener(this);
         buttonSignUp.setOnClickListener(this);
 
-        /*
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final String mail = etEmail.getText().toString();
-                final String password = etPassword.getText().toString();
-                userMail = mail;
-                if (b.isOnline((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))) {
-                    new AsyncLogin().execute(mail, password);
-                } else {
-                    Toast.makeText(Login.this, "No internet access", Toast.LENGTH_LONG).show();
-                }
-
-            }
-        });*/
     }
 
     @Override

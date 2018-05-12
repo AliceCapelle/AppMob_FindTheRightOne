@@ -8,11 +8,11 @@
 
     <EditText
         android:id="@+id/etMailL"
-        android:layout_width="315dp"
+        android:layout_width="181dp"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="187dp"
+        android:layout_alignStart="@+id/etPasswordL"
+        android:layout_marginBottom="186dp"
         android:background="@drawable/edit_text_border"
         android:ems="10"
         android:fontFamily="@font/fjallaone_regular"
@@ -29,7 +29,7 @@
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="124dp"
+        android:layout_marginBottom="96dp"
         android:background="@drawable/edit_text_border"
         android:ems="10"
         android:fontFamily="@font/fjallaone_regular"
@@ -46,16 +46,15 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="52dp"
-        android:layout_marginStart="29dp"
+        android:layout_marginBottom="36dp"
         android:background="@color/bleuButton"
         android:fontFamily="@font/fjallaone_regular"
         android:text="@string/login"
+        android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="20sp"
         tools:layout_editor_absoluteX="148dp"
-        tools:layout_editor_absoluteY="314dp"
-        android:textAllCaps="false"/>
+        tools:layout_editor_absoluteY="314dp" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -99,5 +98,40 @@
         android:textColor="@color/darkBleuText"
         android:textSize="20sp" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/etMailL"
+        android:layout_toEndOf="@+id/etMailL"
+        android:fontFamily="@font/fjallaone_regular"
+        android:text="@string/descartes"
+        android:textColor="@color/colorAccent"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/etMailL"
+        android:layout_marginBottom="244dp"
+        android:fontFamily="@font/fjallaone_regular"
+        android:text="@string/email"
+        android:textColor="@color/colorAccent"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/etMailL"
+        android:layout_marginBottom="155dp"
+        android:fontFamily="@font/fjallaone_regular"
+        android:text="@string/mdp"
+        android:textColor="@color/colorAccent"
+        android:textSize="15sp" />
 
 </RelativeLayout>

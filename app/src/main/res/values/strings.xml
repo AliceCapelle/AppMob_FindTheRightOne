@@ -2,7 +2,8 @@
     <string name="app_name">Find The Right One</string>
     <string name="login">Login</string>
     <string name="sign_up">Sign Up</string>
-    <string name="email">\@etu.parisdescartes.fr</string>
+    <string name="email">Email</string>
+    <string name="descartes">\@etu.parisdescartes.fr</string>
     <string name="mdp">Mot de passe</string>
     <string name="home">Home</string>
 </resources>
