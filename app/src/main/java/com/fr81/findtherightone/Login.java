@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 
 // TODO: 09/05/2018 Write log in external file
-public class Login extends AppCompatActivity {
+public class Login extends AppCompatActivity implements View.OnClickListener{
 
     private EditText etEmail;
     private EditText etPassword;
@@ -41,7 +41,15 @@ public class Login extends AppCompatActivity {
         etEmail = findViewById(R.id.etMailL);
         etPassword = findViewById(R.id.etPasswordL);
 
-        Button button = findViewById(R.id.okLoginButton);
+        Button buttonLogin = findViewById(R.id.okLoginButton);
+        Button buttonHome = findViewById(R.id.bHomeL);
+        Button buttonSignUp = findViewById(R.id.bSignupL);
+
+        buttonLogin.setOnClickListener(this);
+        buttonHome.setOnClickListener(this);
+        buttonSignUp.setOnClickListener(this);
+
+        /*
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,7 +63,31 @@ public class Login extends AppCompatActivity {
                 }
 
             }
-        });
+        });*/
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.okLoginButton:
+                final String mail = etEmail.getText().toString();
+                final String password = etPassword.getText().toString();
+                userMail = mail;
+                if (b.isOnline((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))) {
+                    new AsyncLogin().execute(mail, password);
+                } else {
+                    Toast.makeText(Login.this, "No internet access", Toast.LENGTH_LONG).show();
+                }
+                break;
+            case R.id.bHomeL:
+                Intent home = new Intent(this, Home.class);
+                startActivity(home);
+                break;
+            case R.id.bSignupL:
+                Intent signup = new Intent(this, Signup.class);
+                startActivity(signup);
+                break;
+        }
     }
 
 

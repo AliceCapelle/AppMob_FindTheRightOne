@@ -2,9 +2,12 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#707070</color>
 
-    <color name="backgroundColor">#F5F7FA</color>
+    <color name="backgroundColor">#f5f7fa</color>
     <color name="textAccent">#F05228</color>
     <color name="textPrimary">#707070</color>
+    <color name="white">#ffffff</color>
+    <color name="bleuButton">#4152BC</color>
+    <color name="darkBleuText">#254463</color>
 </resources>

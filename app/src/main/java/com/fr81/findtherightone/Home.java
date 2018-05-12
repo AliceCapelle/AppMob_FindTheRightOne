@@ -19,8 +19,8 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.activity_home);
 
 
-        Button login = (Button) findViewById(R.id.loginButton);
-        Button signup = (Button) findViewById(R.id.signupButton);
+        Button login = findViewById(R.id.loginButton);
+        Button signup = findViewById(R.id.signupButton);
 
         login.setOnClickListener(this);
         signup.setOnClickListener(this);
