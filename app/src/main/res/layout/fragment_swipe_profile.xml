@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/backgroundColor">
+
+    <TextView
+        android:id="@+id/tvNameSwipe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/fjallaone_regular"
+        android:text="Nom"
+        android:textColor="@color/textAccent"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/tvAdjSwipe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="219dp"
+        android:text="Adjectif - Adjectif - Adjectif"
+        android:fontFamily="@font/fjallaone_regular"
+        android:textColor="@color/textPrimary"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/tvDescriptionSwipe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="186dp"
+        android:text="Description"
+        android:fontFamily="@font/fjallaone_regular"
+        android:textColor="@color/textPrimary"
+        android:textSize="15sp"/>
+
+    <com.github.abdularis.civ.CircleImageView
+        android:id="@+id/imageView2"
+        android:layout_width="192dp"
+        android:layout_height="145dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="110dp"
+        app:srcCompat="@drawable/alice" />
+
+
+</RelativeLayout>

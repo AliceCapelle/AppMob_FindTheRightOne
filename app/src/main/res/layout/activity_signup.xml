@@ -1,58 +1,201 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundColor">
 
     <EditText
         android:id="@+id/etMailSU"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="113dp"
+        android:layout_width="181dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/etPasswordSU"
+        android:layout_marginBottom="228dp"
+        android:background="@drawable/edit_text_border"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:fontFamily="@font/fjallaone_regular"
+        android:hint="@string/email"
+        android:inputType="textPersonName"
+        android:padding="10dp"
+        android:textCursorDrawable="@null"
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="129dp" />
 
     <EditText
         android:id="@+id/etPasswordSU"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/etMailSU"
-        android:layout_below="@+id/etMailSU"
-        android:layout_marginTop="34dp"
+        android:layout_width="315dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="129dp"
+        android:background="@drawable/edit_text_border"
         android:ems="10"
-        android:inputType="textPassword" />
+        android:fontFamily="@font/fjallaone_regular"
+        android:hint="@string/mdp"
+        android:inputType="textPassword"
+        android:padding="10dp"
+        android:textCursorDrawable="@null"
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="210dp" />
 
     <Button
         android:id="@+id/okSignupButton"
-        android:layout_width="wrap_content"
+        android:layout_width="318dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="73dp"
-        android:text="Sign up" />
+        android:layout_marginBottom="13dp"
+        android:background="@color/bleuButton"
+        android:fontFamily="@font/fjallaone_regular"
+        android:text="@string/sign_up"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="314dp" />
+
+    <ImageView
+        android:id="@+id/ivSignupLogo"
+        android:layout_width="245dp"
+        android:layout_height="177dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
+        android:contentDescription="Logo"
+        app:srcCompat="@mipmap/singup" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white">
+        <Button
+            android:id="@+id/bHomeL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/button2"
+            android:background="@color/white"
+            android:fontFamily="@font/fjallaone_regular"
+            android:stateListAnimator="@null"
+            android:text="@string/home"
+            android:textAllCaps="false"
+            android:textColor="@color/darkBleuText"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/bSignupL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@color/white"
+            android:fontFamily="@font/fjallaone_regular"
+            android:stateListAnimator="@null"
+            android:text="@string/sign_up"
+            android:textAllCaps="false"
+            android:textColor="@color/darkBleuText"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/descartesMail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/etMailSU"
+        android:layout_toEndOf="@+id/etMailSU"
+        android:fontFamily="@font/fjallaone_regular"
+        android:text="@string/descartes"
+        android:textColor="@color/colorAccent"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/hintEmailL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/etMailSU"
+        android:layout_marginBottom="291dp"
+        android:fontFamily="@font/fjallaone_regular"
+        android:text="@string/email"
+        android:textColor="@color/colorAccent"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/hintPswL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/etMailSU"
+        android:layout_marginBottom="187dp"
+        android:fontFamily="@font/fjallaone_regular"
+        android:text="@string/mdp"
+        android:textColor="@color/colorAccent"
+        android:textSize="15sp" />
 
     <RadioGroup
-        android:id="@+id/radioGroupYear"
-        android:layout_width="wrap_content"
-        android:layout_height="110dp"
+        android:layout_width="221dp"
+        android:layout_height="41dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="146dp">
+        android:layout_alignStart="@+id/etMailSU"
+        android:layout_marginBottom="71dp"
+        android:orientation="horizontal"
+        android:id="@+id/radioGroupYear">
 
         <RadioButton
             android:id="@+id/radioButtonDUT1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="DUT 1" />
+            android:text="@string/dut_1"
+            android:fontFamily="@font/fjallaone_regular"
+            android:textColor="@color/textPrimary"/>
 
         <RadioButton
             android:id="@+id/radioButtonDUT2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="DUT 2"
-            />
+            android:text="@string/dut_2"
+            android:fontFamily="@font/fjallaone_regular"
+            android:textColor="@color/textPrimary"/>
     </RadioGroup>
+
 </RelativeLayout>
+
+
+    <!--
+        <Button
+            android:id="@+id/okSignupButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="73dp"
+            android:text="Sign up" />
+
+        <RadioGroup
+            android:id="@+id/radioGroupYear"
+            android:layout_width="wrap_content"
+            android:layout_height="110dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="146dp">
+
+            <RadioButton
+                android:id="@+id/radioButtonDUT1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="DUT 1" />
+
+            <RadioButton
+                android:id="@+id/radioButtonDUT2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="DUT 2"
+                />
+        </RadioGroup>
+    </RelativeLayout>-->

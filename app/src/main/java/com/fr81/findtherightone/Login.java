@@ -9,8 +9,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -22,6 +24,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     private EditText etEmail;
     private EditText etPassword;
     private String userMail;
+    private Button buttonLogin;
+    private Button buttonHome;
+    private Button buttonSignUp;
+    private ImageView loginLogo;
     private BackendConnection b;
     private static final String PREFS_MAIL = "PREFS_MAIL";
     SharedPreferences sharedPreferences;
@@ -38,16 +44,23 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+
         etEmail = findViewById(R.id.etMailL);
         etPassword = findViewById(R.id.etPasswordL);
 
-        Button buttonLogin = findViewById(R.id.okLoginButton);
-        Button buttonHome = findViewById(R.id.bHomeL);
-        Button buttonSignUp = findViewById(R.id.bSignupL);
+
+        buttonLogin = findViewById(R.id.okLoginButton);
+        buttonHome = findViewById(R.id.bHomeL);
+        buttonSignUp = findViewById(R.id.bSignupL);
 
         buttonLogin.setOnClickListener(this);
         buttonHome.setOnClickListener(this);
         buttonSignUp.setOnClickListener(this);
+
+
 
     }
 
@@ -74,6 +87,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                 break;
         }
     }
+
+
+
 
 
     /**********************************************************************************************/

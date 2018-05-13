@@ -57,7 +57,7 @@
         tools:layout_editor_absoluteY="314dp" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/ivLoginLogo"
         android:layout_width="328dp"
         android:layout_height="283dp"
         android:layout_alignParentTop="true"
@@ -100,7 +100,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/descartesMail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/etMailL"
@@ -111,7 +111,7 @@
         android:textSize="15sp" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/hintEmailL"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -123,7 +123,7 @@
         android:textSize="15sp" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/hintPswL"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

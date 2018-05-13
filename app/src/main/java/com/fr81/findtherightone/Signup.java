@@ -62,11 +62,11 @@ public class Signup extends AppCompatActivity {
                     if (b.isOnline((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))) {
                         new Signup.AsyncSignup(mail, password, year).execute();
                     } else {
-                        Toast.makeText(Signup.this, "No internet access", Toast.LENGTH_LONG).show();
+                        Toast.makeText(Signup.this, "No internet access", Toast.LENGTH_SHORT).show();
                     }
                 }
                 else{
-                    Toast.makeText(Signup.this, "Mot de passe ou adresse mail non valide", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Signup.this, "Mot de passe ou adresse mail non valide", Toast.LENGTH_SHORT).show();
                 }
             }
         });
