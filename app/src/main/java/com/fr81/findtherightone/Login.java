@@ -131,7 +131,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         @Override
         protected void onPostExecute(String result) {
             if(result.equals("OK")){
-                Toast.makeText(Login.this, result, Toast.LENGTH_LONG).show();
                 sharedPreferences = getBaseContext().getSharedPreferences(PREFS, MODE_PRIVATE);
 
                 if (!sharedPreferences.contains(PREFS_MAIL)) {
