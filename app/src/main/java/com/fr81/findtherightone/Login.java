@@ -148,7 +148,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                             .putString(PREFS_MAIL, userMail)
                             .apply();
                 }
-                Intent i = new Intent(Login.this, Profile.class);
+                Intent i = new Intent(Login.this, Swipe.class);
                 startActivity(i);
             }
             else{

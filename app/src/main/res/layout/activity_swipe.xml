@@ -7,6 +7,25 @@
     android:layout_height="match_parent"
     android:background="@color/backgroundColor">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white">
+        <Button
+            android:id="@+id/bProfileS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/button2"
+            android:background="@color/white"
+            android:fontFamily="@font/fjallaone_regular"
+            android:stateListAnimator="@null"
+            android:text="@string/profile"
+            android:textAllCaps="false"
+            android:textColor="@color/darkBleuText"
+            android:textSize="20sp" />
+
+    </LinearLayout>
 
     <ImageButton
         android:id="@+id/dislike"
@@ -15,9 +34,9 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="35dp"
-        android:layout_marginStart="46dp"
-        app:srcCompat="@mipmap/recycling"
-        android:background="@color/backgroundColor"/>
+        android:layout_marginStart="60dp"
+        android:background="@color/backgroundColor"
+        app:srcCompat="@mipmap/recycling" />
 
     <ImageButton
         android:id="@+id/like"
@@ -25,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/dislike"
-        android:layout_marginEnd="70dp"
+        android:layout_marginEnd="60dp"
         android:background="@color/backgroundColor"
         app:srcCompat="@mipmap/heart" />
 </RelativeLayout>

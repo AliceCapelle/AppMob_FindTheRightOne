@@ -1,5 +1,6 @@
 package com.fr81.findtherightone;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
@@ -76,7 +77,8 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bSwipeP:
-                Toast.makeText(Profile.this, "Pas encore disponible", Toast.LENGTH_SHORT).show();
+                Intent swipe = new Intent(this, Swipe.class);
+                startActivity(swipe);
                 break;
             case R.id.bEdit:
                 Toast.makeText(Profile.this, "Pas encore disponible", Toast.LENGTH_SHORT).show();
