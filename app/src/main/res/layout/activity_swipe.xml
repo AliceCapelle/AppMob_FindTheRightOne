@@ -47,4 +47,11 @@
         android:layout_marginEnd="60dp"
         android:background="@color/backgroundColor"
         app:srcCompat="@mipmap/heart" />
+
+    <fragment
+        android:id="@+id/fragment"
+        android:name="com.fr81.findtherightone.FragmentProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
 </RelativeLayout>

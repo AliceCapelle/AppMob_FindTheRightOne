@@ -19,6 +19,8 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
         bProfile = findViewById(R.id.bProfileS);
         bProfile.setOnClickListener(this);
 
+
+
     }
 
     @Override

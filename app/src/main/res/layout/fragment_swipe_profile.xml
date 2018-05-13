@@ -4,7 +4,7 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:background="@color/backgroundColor">
 
-    <TextView
+   <!-- <TextView
         android:id="@+id/tvNameSwipe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -45,7 +45,16 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="110dp"
-        app:srcCompat="@drawable/alice" />
+        app:srcCompat="@drawable/alice" />-->
 
 
+    <TextView
+        android:id="@+id/tvFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Fragment"
+        android:textColor="@color/textAccent"
+        android:fontFamily="@font/fjallaone_regular"
+        android:textSize="30sp"/>
 </RelativeLayout>
