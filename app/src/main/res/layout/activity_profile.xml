@@ -37,15 +37,18 @@
         android:fontFamily="@font/fjallaone_regular"
         android:textSize="20sp"/>
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/imgProfile"
-        android:layout_width="158dp"
-        android:layout_height="132dp"
+        android:layout_width="142dp"
+        android:layout_height="142dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="149dp"
-        android:adjustViewBounds="true"
-        android:visibility="visible" />
+        android:layout_marginTop="144dp"
+        android:visibility="visible"
+        app:civ_border_color="#707070"
+        app:civ_border_width="0.1dp" />
+
 
     <ProgressBar
         android:id="@+id/pBProfile"

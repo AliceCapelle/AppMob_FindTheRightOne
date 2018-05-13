@@ -1,6 +1,8 @@
 package com.fr81.findtherightone;
 
 import android.content.SharedPreferences;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -58,6 +60,14 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         String mail = sharedPreferences.getString("PREFS_MAIL", null);
 
         new Profile.AsyncProfil().execute(mail);
+
+
+        ImageView imageview = (ImageView) findViewById(R.id.imgProfile);
+        ColorMatrix matrix = new ColorMatrix();
+        matrix.setSaturation(0);
+
+        ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
+        imageview.setColorFilter(filter);
 
 
     }
@@ -129,7 +139,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 picPath = picPath.replace("..", "");
                 Log.i("PICTURE", "http://tinder.student.elwinar.com" + picPath);
 
-                Picasso.get().load("http://tinder.student.elwinar.com" + picPath).into(imgProfile, new Callback() {
+                Picasso.get().load("http://tinder.student.elwinar.com" + picPath).noFade().into(imgProfile, new Callback() {
                     @Override
                     public void onSuccess() {
                         p.setVisibility(View.GONE);
