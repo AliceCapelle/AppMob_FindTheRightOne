@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Profile_Other_User">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white">
+
+        <Button
+            android:id="@+id/bSwipeP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:fontFamily="@font/fjallaone_regular"
+            android:stateListAnimator="@null"
+            android:text="@string/swipe"
+            android:textAllCaps="false"
+            android:textColor="@color/darkBleuText"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/imgProfile_Other"
+        android:layout_width="142dp"
+        android:layout_height="142dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="visible"
+        app:civ_border_color="#707070"
+        app:civ_border_width="0.1dp"
+        tools:layout_editor_absoluteX="121dp"
+        tools:layout_editor_absoluteY="159dp" />
+
+    <TextView
+        android:id="@+id/tvMatch_Other"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="80dp"
+        android:fontFamily="@font/fjallaone_regular"
+        android:text="Matchs"
+        android:textColor="@color/darkBleuText"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <TextView
+        android:id="@+id/tv_Other_Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="159dp"
+        android:layout_marginStart="159dp"
+        android:fontFamily="@font/fjallaone_regular"
+        android:text="Name"
+        android:textColor="@color/textAccent"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvAdjectives_Other"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tvAdjectives_Other"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="39dp"
+        android:layout_marginEnd="123dp"
+        android:layout_marginStart="123dp"
+        android:fontFamily="@font/fjallaone_regular"
+        android:text="Adj - Adj - Adj"
+        android:textColor="@color/textPrimary"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvDescription_Other"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tvDescription_Other"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="77dp"
+        android:layout_marginEnd="151dp"
+        android:layout_marginStart="152dp"
+        android:fontFamily="@font/fjallaone_regular"
+        android:text="Description"
+        android:textColor="@color/textPrimary"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</android.support.constraint.ConstraintLayout>
