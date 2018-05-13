@@ -71,7 +71,7 @@
         android:layout_height="50dp"
         android:background="@color/white">
         <Button
-            android:id="@+id/bHomeL"
+            android:id="@+id/bHomeSU"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -85,7 +85,7 @@
             android:textSize="20sp" />
 
         <Button
-            android:id="@+id/bSignupL"
+            android:id="@+id/bLoginSU"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -93,7 +93,7 @@
             android:background="@color/white"
             android:fontFamily="@font/fjallaone_regular"
             android:stateListAnimator="@null"
-            android:text="@string/sign_up"
+            android:text="@string/login"
             android:textAllCaps="false"
             android:textColor="@color/darkBleuText"
             android:textSize="20sp" />
@@ -111,7 +111,7 @@
         android:textSize="15sp" />
 
     <TextView
-        android:id="@+id/hintEmailL"
+        android:id="@+id/hintEmailSU"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -123,7 +123,7 @@
         android:textSize="15sp" />
 
     <TextView
-        android:id="@+id/hintPswL"
+        android:id="@+id/hintPswSU"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

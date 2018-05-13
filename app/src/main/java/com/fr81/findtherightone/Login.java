@@ -44,10 +44,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        getWindow().setSoftInputMode(
-                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
-
         etEmail = findViewById(R.id.etMailL);
         etPassword = findViewById(R.id.etPasswordL);
 

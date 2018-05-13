@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -19,7 +21,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 
 
-public class Profile extends AppCompatActivity {
+public class Profile extends AppCompatActivity implements View.OnClickListener {
 
     private BackendConnection b = new BackendConnection();
     private TextView tvDescription;
@@ -27,6 +29,8 @@ public class Profile extends AppCompatActivity {
     private TextView tvAdjectives;
     private TextView tvMatch;
     private ImageView imgProfile;
+    private Button bSwipe;
+    private Button bEdit;
     private SharedPreferences sharedPreferences;
     ProgressBar p;
 
@@ -37,6 +41,12 @@ public class Profile extends AppCompatActivity {
 
         p = findViewById(R.id.pBProfile);
         p.setVisibility(View.VISIBLE);
+
+        bSwipe = findViewById(R.id.bSwipeP);
+        bEdit = findViewById(R.id.bEdit);
+
+        bSwipe.setOnClickListener(this);
+        bEdit.setOnClickListener(this);
 
         tvDescription = findViewById(R.id.tvDescription);
         tvName = findViewById(R.id.tvName);
@@ -52,6 +62,17 @@ public class Profile extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.bSwipeP:
+                Toast.makeText(Profile.this, "Pas encore disponible", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.bEdit:
+                Toast.makeText(Profile.this, "Pas encore disponible", Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
 
 
     private class AsyncProfil extends AsyncTask<String, String, String> {

@@ -8,4 +8,6 @@
     <string name="home">Home</string>
     <string name="dut_2">DUT 2</string>
     <string name="dut_1">DUT 1</string>
+    <string name="swipe">Swipe</string>
+    <string name="editer">Editer</string>
 </resources>
