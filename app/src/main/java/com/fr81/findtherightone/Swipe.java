@@ -13,7 +13,9 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
     Button bProfile;
     ImageButton bLike;
     ImageButton bDislike;
-    Fragment fragmentProfile;
+    FragmentProfile profileF = null;
+    Bundle b;
+    int cpt = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +31,14 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
         bLike.setOnClickListener(this);
         bDislike.setOnClickListener(this);
 
+        profileF = new FragmentProfile();
+
+        b = new Bundle();
+        b.putInt("cpt", cpt);
+        profileF.setArguments(b);
+
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.profileFragment, new FragmentProfile())
+                .replace(R.id.profileFragment, profileF)
                 .commit();
 
 
@@ -44,12 +52,21 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
                 startActivity(profile);
                 break;
             case R.id.dislike:
+                cpt++;
+                b = new Bundle();
+                b.putInt("cpt", cpt);
+                profileF.setArguments(b);
                 getSupportFragmentManager().beginTransaction().
                         remove(getSupportFragmentManager().findFragmentById(R.id.profileFragment)).commit();
                 break;
             case R.id.like:
+                cpt++;
+                b = new Bundle();
+                b.putInt("cpt", cpt);
+                profileF = new FragmentProfile();
+                profileF.setArguments(b);
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.profileFragment, new FragmentProfile())
+                        .replace(R.id.profileFragment, profileF)
                         .commit();
                 break;
         }
