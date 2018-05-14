@@ -21,12 +21,12 @@ public class FragmentProfile extends Fragment{
     }
 
 
-    @Override
+   /* @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         int cpt = getArguments().getInt("cpt");
         TextView t =getView().findViewById(R.id.tvNameSwipe);
         t.setText(String.valueOf(cpt));
-    }
+    }*/
 
 
 }
