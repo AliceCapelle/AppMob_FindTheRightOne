@@ -13,6 +13,14 @@ import org.w3c.dom.Text;
 
 public class FragmentProfile extends Fragment{
 
+    private TextView tvName;
+    private TextView tvAdjs;
+    private TextView tvDescription;
+
+    private String name;
+    private String adjs;
+    private String description;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -20,13 +28,21 @@ public class FragmentProfile extends Fragment{
         return inflater.inflate(R.layout.fragment_swipe_profile, container, false);
     }
 
-
-   /* @Override
+/*
+    @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        int cpt = getArguments().getInt("cpt");
-        TextView t =getView().findViewById(R.id.tvNameSwipe);
-        t.setText(String.valueOf(cpt));
-    }*/
+        tvName = getView().findViewById(R.id.tvNameSwipe);
+        tvAdjs = getView().findViewById(R.id.tvAdjSwipe);
+        tvDescription = getView().findViewById(R.id.tvDescriptionSwipe);
 
+        name = getArguments().getString("name");
+        adjs = getArguments().getString("adjs");
+        description = getArguments().getString("description");
+
+        tvName.setText(name);
+        tvAdjs.setText(adjs);
+        tvDescription.setText(description);
+    }
+*/
 
 }

@@ -122,7 +122,12 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
 
 
 
-        public void setNewProfile(){
+        public void setNewProfile(Bundle b){
+            profileF = new FragmentProfile();
+            profileF.setArguments(b);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.profileFragment, profileF)
+                    .commit();
 
     }
 }
