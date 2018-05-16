@@ -121,8 +121,11 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         protected void onPostExecute(String result) {
 
             try {
+                Log.i("profile", result);
                 JSONObject json = new JSONObject(result.toString());
                 JSONObject student = json.getJSONObject("student");
+                Log.i("profile", json.toString());
+                Log.i("profile", student.toString());
 
                 String description = student.getString("description");
                 tvDescription.setText(description.equals("null") ? "Pas de description" : description);

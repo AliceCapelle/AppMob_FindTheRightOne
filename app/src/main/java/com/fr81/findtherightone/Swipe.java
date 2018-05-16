@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -48,6 +49,11 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
         String mail = sharedPreferences.getString("PREFS_MAIL", null);
 
         new Swipe.AsyncSwipe().execute(mail);
+
+        /*
+        b = buildBundle();
+        setNewProfile(b);
+         */
 
         profileF = new FragmentProfile();
 
@@ -110,7 +116,7 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
         protected void onPostExecute(String result) {
             Log.i("RESULTAT REQUETE SWIPE", result);
             try {
-                JSONObject json = new JSONObject(result.toString());
+                JSONArray json = new JSONArray(result.toString());
                 Log.i("RESULTAT REQUETE SWIPE", json.toString());
 
             } catch (JSONException e) {
@@ -121,6 +127,13 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
     }
 
 
+        public Bundle buildBundle(String name, String adjs, String description){
+            Bundle bundle = new Bundle();
+            bundle.putString("name", name);
+            bundle.putString("ajds", adjs);
+            bundle.putString("description", description);
+            return bundle;
+        }
 
         public void setNewProfile(Bundle b){
             profileF = new FragmentProfile();
