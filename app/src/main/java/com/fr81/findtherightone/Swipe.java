@@ -16,9 +16,10 @@ import android.widget.ImageButton;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.simple.parser.JSONParser;
+
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 
 public class Swipe extends AppCompatActivity implements View.OnClickListener {
@@ -29,7 +30,13 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
     FragmentProfile profileF = null;
     Bundle b;
     BackendConnection back;
+    Array student;
+    int cpt;
 
+
+    //Mettre json dans tableau, garder le numéro du student affiché dans cpt.
+    //On execute les methode buildbunder et setnewprofile une fois dans onpostexcute
+    //puis à chaque fois qu'on clique sur un button
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +58,7 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
         new Swipe.AsyncSwipe().execute(mail);
 
         /*
-        b = buildBundle();
-        setNewProfile(b);
+        setNewProfile(buildBundle());
          */
 
         profileF = new FragmentProfile();
@@ -74,11 +80,13 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
                 startActivity(profile);
                 break;
             /*case R.id.dislike:
+                //setNewProfile(buildBundle());
                 profileF.setArguments(b);
                 getSupportFragmentManager().beginTransaction().
                         remove(getSupportFragmentManager().findFragmentById(R.id.profileFragment)).commit();
                 break;
             case R.id.like:
+                //setNewProfile(buildBundle());
                 profileF = new FragmentProfile();
                 profileF.setArguments(b);
                 getSupportFragmentManager().beginTransaction()
@@ -116,9 +124,9 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
         protected void onPostExecute(String result) {
             Log.i("RESULTAT REQUETE SWIPE", result);
             try {
-                JSONArray json = new JSONArray(result.toString());
+                JSONArray json =new JSONArray(result.toString());
                 Log.i("RESULTAT REQUETE SWIPE", json.toString());
-
+                json.get(1);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -141,6 +149,5 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.profileFragment, profileF)
                     .commit();
-
     }
 }
