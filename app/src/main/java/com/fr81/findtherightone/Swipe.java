@@ -22,16 +22,20 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 
+// TODO: 17/05/18 on affiche fragment plus de profile si numberOfStundent = 0 
+
 public class Swipe extends AppCompatActivity implements View.OnClickListener {
 
-    Button bProfile;
-    ImageButton bLike;
-    ImageButton bDislike;
-    FragmentProfile profileF = null;
-    Bundle b;
-    BackendConnection back;
-    int cpt = 0;
-    int numberOfStundent;
+    private Button bProfile;
+    private ImageButton bLike;
+    private ImageButton bDislike;
+    private FragmentProfile profileF = null;
+    private Bundle b;
+    private BackendConnection back;
+    private int cpt = 0;
+    private int numberOfStundent = 0;
+    private JSONArray arrayStudnent;
+    private JSONObject student;
 
 
     //Mettre json dans tableau, garder le numéro du student affiché dans cpt.
@@ -79,20 +83,19 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
                 Intent profile = new Intent(this, Profile.class);
                 startActivity(profile);
                 break;
-            /*case R.id.dislike:
-                //setNewProfile(buildBundle());
-                profileF.setArguments(b);
-                getSupportFragmentManager().beginTransaction().
-                        remove(getSupportFragmentManager().findFragmentById(R.id.profileFragment)).commit();
+            case R.id.dislike:
+                if(numberOfStundent>0){
+                    b = buildBundle();
+                    setNewProfile(b);
+                }
+                
                 break;
             case R.id.like:
-                //setNewProfile(buildBundle());
-                profileF = new FragmentProfile();
-                profileF.setArguments(b);
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.profileFragment, profileF)
-                        .commit();
-                break;*/
+                if(numberOfStundent>0){
+                    b = buildBundle();
+                    setNewProfile(b);
+                }
+                break;
         }
     }
 
@@ -123,14 +126,12 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
         @Override
         protected void onPostExecute(String result) {
             try {
-                JSONArray jsonArray =new JSONArray(result.toString());
-                numberOfStundent = jsonArray.length();
-                JSONObject student = jsonArray.getJSONObject(cpt);
-                String adjs = student.getString("adj1") + " - " +
-                        student.getString("adj2") + " - " +
-                        student.getString("adj3");
-                b = buildBundle(student.getString("surname"), adjs, student.getString("description"));
-                setNewProfile(b);
+                arrayStudnent = new JSONArray(result.toString());
+                numberOfStundent = arrayStudnent.length();
+                if(numberOfStundent>0){
+                    b = buildBundle();
+                    setNewProfile(b);
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -139,11 +140,23 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
     }
 
 
-        public Bundle buildBundle(String name, String adjs, String description){
+        public Bundle buildBundle(){
             Bundle bundle = new Bundle();
-            bundle.putString("name", name);
-            bundle.putString("ajds", adjs);
-            bundle.putString("description", description);
+            try {
+                student = arrayStudnent.getJSONObject(cpt);
+
+                String adjs = student.getString("adj1") + " - " +
+                        student.getString("adj2") + " - " +
+                        student.getString("adj3");
+
+                bundle.putString("name", student.getString("surname"));
+                bundle.putString("adjs", adjs);
+                bundle.putString("description", student.getString("description"));
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
             return bundle;
         }
 
