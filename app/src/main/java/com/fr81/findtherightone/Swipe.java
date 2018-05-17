@@ -30,8 +30,8 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
     FragmentProfile profileF = null;
     Bundle b;
     BackendConnection back;
-    Array student;
-    int cpt;
+    int cpt = 0;
+    int numberOfStundent;
 
 
     //Mettre json dans tableau, garder le numéro du student affiché dans cpt.
@@ -59,7 +59,7 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
 
         /*
         setNewProfile(buildBundle());
-         */
+
 
         profileF = new FragmentProfile();
 
@@ -67,7 +67,7 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.profileFragment, profileF)
-                .commit();
+                .commit();*/
 
 
     }
@@ -122,11 +122,15 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
 
         @Override
         protected void onPostExecute(String result) {
-            Log.i("RESULTAT REQUETE SWIPE", result);
             try {
-                JSONArray json =new JSONArray(result.toString());
-                Log.i("RESULTAT REQUETE SWIPE", json.toString());
-                json.get(1);
+                JSONArray jsonArray =new JSONArray(result.toString());
+                numberOfStundent = jsonArray.length();
+                JSONObject student = jsonArray.getJSONObject(cpt);
+                String adjs = student.getString("adj1") + " - " +
+                        student.getString("adj2") + " - " +
+                        student.getString("adj3");
+                b = buildBundle(student.getString("surname"), adjs, student.getString("description"));
+                setNewProfile(b);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -149,5 +153,6 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.profileFragment, profileF)
                     .commit();
+            cpt++;
     }
 }

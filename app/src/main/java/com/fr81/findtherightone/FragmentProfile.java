@@ -28,7 +28,7 @@ public class FragmentProfile extends Fragment{
         return inflater.inflate(R.layout.fragment_swipe_profile, container, false);
     }
 
-/*
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         tvName = getView().findViewById(R.id.tvNameSwipe);
@@ -43,6 +43,6 @@ public class FragmentProfile extends Fragment{
         tvAdjs.setText(adjs);
         tvDescription.setText(description);
     }
-*/
+
 
 }
