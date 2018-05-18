@@ -1,5 +1,6 @@
 package com.fr81.findtherightone;
 
+import android.app.Notification;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -43,6 +44,8 @@ public class FragmentProfile extends Fragment{
         tvName.setText(name);
         tvAdjs.setText(adjs);
         tvDescription.setText(description);
+
+
     }
 
 

@@ -1,5 +1,6 @@
 package com.fr81.findtherightone;
 
+import android.app.Notification;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -58,8 +59,9 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
         SharedPreferences sharedPreferences = getBaseContext().getSharedPreferences("PREFS", MODE_PRIVATE);
         mail = sharedPreferences.getString("PREFS_MAIL", null);
 
-        new Swipe.AsyncSwipe().execute(mail);
 
+
+        new Swipe.AsyncSwipe().execute(mail);
 
     }
 
@@ -91,7 +93,6 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
 
                 arrayStudnent.remove(arrayStudnent.length() - 1);
                 if (arrayStudnent.length() > 0) {
-
                     b = buildBundle();
                     setNewProfile(b);
                 } else {
@@ -168,6 +169,9 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
 
         }
 
+
+
+
     }
 
     public Bundle buildBundle() {
@@ -192,6 +196,8 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
     }
 
     public void setNewProfile(Bundle b) {
+
+
         profileF = new FragmentProfile();
         profileF.setArguments(b);
         getSupportFragmentManager().beginTransaction()
