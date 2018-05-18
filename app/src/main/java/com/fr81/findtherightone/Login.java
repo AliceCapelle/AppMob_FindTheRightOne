@@ -130,7 +130,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         // TODO: 09/05/2018  if "OK", we launch swipe, if "FIRST", we lauch adj, if "FAIL", we display error
         @Override
         protected void onPostExecute(String result) {
-            if(result.equals("OK")){
+            if(result.equals("OK") || result.equals("FIRST")){
                 sharedPreferences = getBaseContext().getSharedPreferences(PREFS, MODE_PRIVATE);
 
                 if (!sharedPreferences.contains(PREFS_MAIL)) {

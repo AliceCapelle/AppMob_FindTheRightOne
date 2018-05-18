@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 
 import org.json.JSONArray;
@@ -36,11 +37,9 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
     private int numberOfStundent = 0;
     private JSONArray arrayStudnent;
     private JSONObject student;
+    private String mail;
+    private boolean fin = false;
 
-
-    //Mettre json dans tableau, garder le numéro du student affiché dans cpt.
-    //On execute les methode buildbunder et setnewprofile une fois dans onpostexcute
-    //puis à chaque fois qu'on clique sur un button
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,21 +56,9 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
         bDislike.setOnClickListener(this);
 
         SharedPreferences sharedPreferences = getBaseContext().getSharedPreferences("PREFS", MODE_PRIVATE);
-        String mail = sharedPreferences.getString("PREFS_MAIL", null);
+        mail = sharedPreferences.getString("PREFS_MAIL", null);
 
         new Swipe.AsyncSwipe().execute(mail);
-
-        /*
-        setNewProfile(buildBundle());
-
-
-        profileF = new FragmentProfile();
-
-        profileF.setArguments(b);
-
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.profileFragment, profileF)
-                .commit();*/
 
 
     }
@@ -84,16 +71,32 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
                 startActivity(profile);
                 break;
             case R.id.dislike:
-                if(numberOfStundent>0){
+                arrayStudnent.remove(arrayStudnent.length() - 1);
+                if (arrayStudnent.length() > 0) {
                     b = buildBundle();
                     setNewProfile(b);
+                } else {
+                    fin = true;
+                    Log.i("Swipe", "Plus d'étudiant");
                 }
-                
                 break;
             case R.id.like:
-                if(numberOfStundent>0){
+                if (!fin) {
+                    try {
+                        new AsyncLike().execute(student.getString("email"), mail);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                arrayStudnent.remove(arrayStudnent.length() - 1);
+                if (arrayStudnent.length() > 0) {
+
                     b = buildBundle();
                     setNewProfile(b);
+                } else {
+                    fin = true;
+                    Log.i("Swipe", "Plus d'étudiant");
                 }
                 break;
         }
@@ -127,8 +130,8 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
         protected void onPostExecute(String result) {
             try {
                 arrayStudnent = new JSONArray(result.toString());
-                numberOfStundent = arrayStudnent.length();
-                if(numberOfStundent>0){
+
+                if (arrayStudnent.length() > 0) {
                     b = buildBundle();
                     setNewProfile(b);
                 }
@@ -139,33 +142,60 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
+    private class AsyncLike extends AsyncTask<String, String, String> {
 
-        public Bundle buildBundle(){
-            Bundle bundle = new Bundle();
+        @Override
+        protected String doInBackground(String... params) {
+            HttpURLConnection conn;
+            String result = "fail";
             try {
-                student = arrayStudnent.getJSONObject(cpt);
+                conn = back.connect("https://tinder.student.elwinar.com/controller/like_student.php", "POST");
 
-                String adjs = student.getString("adj1") + " - " +
-                        student.getString("adj2") + " - " +
-                        student.getString("adj3");
+                Uri.Builder builder = new Uri.Builder()
+                        .appendQueryParameter("mail", params[0])
+                        .appendQueryParameter("mail_co", params[1]);
 
-                bundle.putString("name", student.getString("surname"));
-                bundle.putString("adjs", adjs);
-                bundle.putString("description", student.getString("description"));
 
-            } catch (JSONException e) {
+                String query = builder.build().getEncodedQuery();
+                back.sendData(conn, query);
+
+                result = back.getData(conn);
+                Log.i("RESULT", result);
+            } catch (IOException e) {
                 e.printStackTrace();
             }
+            return result;
 
-            return bundle;
         }
 
-        public void setNewProfile(Bundle b){
-            profileF = new FragmentProfile();
-            profileF.setArguments(b);
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.profileFragment, profileF)
-                    .commit();
-            cpt++;
+    }
+
+    public Bundle buildBundle() {
+        Bundle bundle = new Bundle();
+        try {
+            Log.i("BUNDEL NUMBER", String.valueOf(arrayStudnent.length() - 1));
+            student = arrayStudnent.getJSONObject(arrayStudnent.length() - 1);
+
+            String adjs = student.getString("adj1") + " - " +
+                    student.getString("adj2") + " - " +
+                    student.getString("adj3");
+
+            bundle.putString("name", student.getString("surname"));
+            bundle.putString("adjs", adjs);
+            bundle.putString("description", student.getString("description"));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return bundle;
+    }
+
+    public void setNewProfile(Bundle b) {
+        profileF = new FragmentProfile();
+        profileF.setArguments(b);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.profileFragment, profileF)
+                .commit();
     }
 }
