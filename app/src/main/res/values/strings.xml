@@ -10,5 +10,6 @@
     <string name="dut_1">DUT 1</string>
     <string name="swipe">Swipe</string>
     <string name="editer">Editer</string>
-    <string name="profile">Profile</string>
+    <string name="profile">Profil</string>
+    <string name="confirm">Confirmer</string>
 </resources>

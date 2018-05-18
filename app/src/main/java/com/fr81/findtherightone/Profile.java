@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -35,7 +36,9 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     private Button bSwipe;
     private Button bEdit;
     private SharedPreferences sharedPreferences;
-    ProgressBar p;
+    private ProgressBar p;
+    private Button bCloseEdit;
+    private boolean editMode = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +50,11 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
         bSwipe = findViewById(R.id.bSwipeP);
         bEdit = findViewById(R.id.bEdit);
+        bCloseEdit = findViewById(R.id.bCloseEdit);
 
         bSwipe.setOnClickListener(this);
         bEdit.setOnClickListener(this);
+        bCloseEdit.setOnClickListener(this);
 
         tvDescription = findViewById(R.id.tvDescription);
         tvName = findViewById(R.id.tvName);
@@ -73,13 +78,34 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        EditText etDescription = findViewById(R.id.etDescription);
+        TextView tvDescription = findViewById(R.id.tvDescription);
         switch (v.getId()) {
             case R.id.bSwipeP:
                 Intent swipe = new Intent(this, Swipe.class);
                 startActivity(swipe);
                 break;
             case R.id.bEdit:
-                Toast.makeText(Profile.this, "Pas encore disponible", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(Profile.this, "Pas encore disponible", Toast.LENGTH_SHORT).show();
+                editMode = !editMode;
+
+                //If we want to edit the profile description
+                if(editMode) {
+                    etDescription.setVisibility(View.VISIBLE);
+                    tvDescription.setVisibility(View.INVISIBLE);
+                    bCloseEdit.setVisibility(View.VISIBLE);
+                }
+                else {
+                    //Validate
+                    bCloseEdit.setVisibility(View.INVISIBLE);
+                    //TODO Connect and update description
+                }
+                break;
+            case R.id.bCloseEdit:
+                etDescription.setVisibility(View.INVISIBLE);
+                tvDescription.setVisibility(View.VISIBLE);
+                bCloseEdit.setVisibility(View.INVISIBLE);
+                editMode = !editMode;
                 break;
         }
     }

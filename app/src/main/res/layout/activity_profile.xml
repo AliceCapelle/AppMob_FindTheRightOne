@@ -119,5 +119,26 @@
         android:layout_alignTop="@+id/bEdit"
         android:background="@color/textPrimary" />
 
+    <EditText
+        android:id="@+id/etDescription"
+        android:layout_width="283dp"
+        android:layout_height="88dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="62dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/bCloseEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/bEdit"
+        android:layout_below="@+id/tvAdjectives"
+        android:layout_marginTop="-165dp"
+        android:text="Button"
+        android:visibility="invisible" />
+
 
 </RelativeLayout>
