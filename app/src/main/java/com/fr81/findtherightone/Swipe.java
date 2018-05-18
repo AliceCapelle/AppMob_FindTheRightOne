@@ -96,6 +96,7 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
                     setNewProfile(b);
                 }
                 break;
+                
         }
     }
 
