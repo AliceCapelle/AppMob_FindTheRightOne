@@ -39,6 +39,7 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
     private JSONObject student;
     private String mail;
     private boolean fin = false;
+    private String picStudent;
 
 
     @Override
@@ -82,6 +83,11 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
                 break;
             case R.id.like:
                 if (!fin) {
+                    try {
+                        picStudent = student.getString("pic");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                     try {
                         new AsyncLike().execute(student.getString("email"), mail);
                     } catch (JSONException e) {
@@ -144,9 +150,11 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
     }
 
     private class AsyncLike extends AsyncTask<String, String, String> {
-
+        String mail, mailCo;
         @Override
         protected String doInBackground(String... params) {
+            mail = params[0];
+            mailCo = params[1];
             HttpURLConnection conn;
             String result = "fail";
             try {
@@ -168,6 +176,19 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
             return result;
 
         }
+        @Override
+        protected void onPostExecute(String result) {
+           if(result.equals("MATCH")){
+              Intent i = new Intent(Swipe.this, Match.class);
+              i.putExtra("mail",mail);
+              i.putExtra("mailCo", mailCo);
+
+                  i.putExtra("pic", picStudent);
+
+               startActivity(i);
+           }
+
+        }
 
     }
 
@@ -184,6 +205,7 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
             bundle.putString("name", student.getString("surname"));
             bundle.putString("adjs", adjs);
             bundle.putString("description", student.getString("description"));
+
 
         } catch (JSONException e) {
             e.printStackTrace();
