@@ -13,7 +13,7 @@
         android:background="@color/white">
 
         <Button
-            android:id="@+id/bSwipeP"
+            android:id="@+id/bSwipe_Other"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/white"
@@ -37,6 +37,17 @@
         app:civ_border_width="0.1dp"
         tools:layout_editor_absoluteX="121dp"
         tools:layout_editor_absoluteY="159dp" />
+
+    <ProgressBar
+        android:id="@+id/pBProfile_Other"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="186dp"
+        android:visibility="invisible"
+        />
 
     <TextView
         android:id="@+id/tvMatch_Other"
@@ -103,4 +114,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+
 </android.support.constraint.ConstraintLayout>
