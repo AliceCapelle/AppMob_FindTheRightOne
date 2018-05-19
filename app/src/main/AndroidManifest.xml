@@ -34,7 +34,7 @@
         <activity
             android:name=".Profile"
             android:screenOrientation="portrait" />
-        <activity android:name=".Profile_Other_User"
+        <activity android:name=".ProfileOtherUser"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".Swipe"
