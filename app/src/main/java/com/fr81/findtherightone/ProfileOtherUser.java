@@ -14,10 +14,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -36,7 +34,7 @@ public class ProfileOtherUser extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile__other__user);
+        setContentView(R.layout.activity_profile_other_user);
 
         p = findViewById(R.id.pBProfile_Other);
         p.setVisibility(View.VISIBLE);

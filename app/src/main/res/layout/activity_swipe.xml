@@ -7,6 +7,16 @@
     android:layout_height="match_parent"
     android:background="@color/backgroundColor">
 
+    <FrameLayout
+        android:id="@+id/profileFragment"
+        android:layout_width="match_parent"
+        android:layout_height="390dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="57dp">
+
+    </FrameLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -84,15 +94,5 @@
         android:visibility="invisible"
         tools:layout_editor_absoluteX="148dp"
         tools:layout_editor_absoluteY="314dp" />
-
-    <FrameLayout
-        android:id="@+id/profileFragment"
-        android:layout_width="match_parent"
-        android:layout_height="390dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="57dp">
-
-    </FrameLayout>
 
 </RelativeLayout>

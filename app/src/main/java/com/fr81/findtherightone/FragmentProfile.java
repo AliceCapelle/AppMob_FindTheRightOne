@@ -55,8 +55,6 @@ public class FragmentProfile extends Fragment{
         tvDescription.setText(description);
         Picasso.get().load("http://tinder.student.elwinar.com" + picPath).noFade().into(ivStudentPic);
         ToolBox.blackAndWhitePic(ivStudentPic);
-
-
     }
 
 

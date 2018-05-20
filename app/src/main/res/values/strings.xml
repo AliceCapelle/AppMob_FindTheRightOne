@@ -14,4 +14,7 @@
     <string name="confirm">Confirmer</string>
     <string name="no_more_profile">Tu as vu tous les profiles !</string>
     <string name="see_profile_again">Revoir les profils</string>
+    <string name="description">Description</string>
+    <string name="adj_layout">Adjectif - Adjectif - Adjectif</string>
+    <string name="name">Nom</string>
 </resources>
