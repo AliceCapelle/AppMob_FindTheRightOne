@@ -23,7 +23,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 
-public class Profile_Other_User extends AppCompatActivity implements View.OnClickListener {
+public class ProfileOtherUser extends AppCompatActivity implements View.OnClickListener {
     private BackendConnection b = new BackendConnection();
     private TextView tvDescription_Other;
     private TextView tv_Other_Name;
@@ -59,30 +59,7 @@ public class Profile_Other_User extends AppCompatActivity implements View.OnClic
         imgProfile_Other.setColorFilter(filter);
 
 
-        /*String otherstudent = loadData("getthemailafter the click on swipe page");
-        JSONObject info_other_student = decodeData(otherstudent);
-        try {
-            tv_Other_Name = findViewById(R.id.tv_Other_Name);
-            tv_Other_Name.setText(info_other_student.getString("surname"));
-            tvAdjectives_Other = findViewById(R.id.tvAdjectives_Other);
-            tvAdjectives_Other.setText(info_other_student.getString("adj1") + " - " +
-                    info_other_student.getString("adj2") + " - " +
-                    info_other_student.getString("adj3"));
-            tvDescription_Other = findViewById(R.id.tvDescription_Other);
-            tvDescription_Other.setText(info_other_student.getString("description"));
-            tvMatch_Other = findViewById(R.id.tvMatch_Other);
-            tvMatch_Other.setText(info_other_student.getString("match"));
 
-            String picPath = info_other_student.getString("pic");
-            picPath = picPath.replace("\\", "/");
-            picPath = picPath.replace("..", "");
-            Log.i("PICTURE", "http://tinder.student.elwinar.com" + picPath);
-
-            Picasso.get().load("http://tinder.student.elwinar.com" + picPath).noFade().into(imgProfile_Other);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }*/
     }
     // Top menu to navigate on click
     @Override
