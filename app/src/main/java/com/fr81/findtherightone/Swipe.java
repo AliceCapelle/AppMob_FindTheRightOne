@@ -10,6 +10,8 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -46,6 +48,7 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
     private ImageView sadStudent;
     private TextView tvNoProfile;
     private Button bMoreProfile;
+    private Animation shake;
 
 
 
@@ -84,6 +87,8 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
                 startActivity(profile);
                 break;
             case R.id.dislike:
+                shake = AnimationUtils.loadAnimation(this, R.anim.shake);
+                bDislike.startAnimation(shake);
                 arrayStudnent.remove(arrayStudnent.length() - 1);
                 if (arrayStudnent.length() > 0) {
                     b = buildBundle();
@@ -97,6 +102,8 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
                 }
                 break;
             case R.id.like:
+                shake = AnimationUtils.loadAnimation(this, R.anim.shake);
+                bLike.startAnimation(shake);
                 if (!fin) {
                     try {
                         picStudent = student.getString("pic");
@@ -247,6 +254,7 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
         profileF = new FragmentProfile();
         profileF.setArguments(b);
         getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
                 .replace(R.id.profileFragment, profileF)
                 .commit();
     }
