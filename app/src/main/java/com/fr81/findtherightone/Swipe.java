@@ -12,6 +12,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -41,6 +43,10 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
     private String mail;
     private boolean fin = false;
     private String picStudent;
+    private ImageView sadStudent;
+    private TextView tvNoProfile;
+    private Button bMoreProfile;
+
 
 
     @Override
@@ -49,6 +55,10 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_swipe);
 
+        sadStudent = findViewById(R.id.ivSadStudent);
+        tvNoProfile = findViewById(R.id.tvNoProfile);
+        bMoreProfile = findViewById(R.id.bMoreProfile);
+
         bProfile = findViewById(R.id.bProfileS);
         bLike = findViewById(R.id.like);
         bDislike = findViewById(R.id.dislike);
@@ -56,10 +66,10 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
         bProfile.setOnClickListener(this);
         bLike.setOnClickListener(this);
         bDislike.setOnClickListener(this);
+        bMoreProfile.setOnClickListener(this);
 
         SharedPreferences sharedPreferences = getBaseContext().getSharedPreferences("PREFS", MODE_PRIVATE);
         mail = sharedPreferences.getString("PREFS_MAIL", null);
-
 
 
         new Swipe.AsyncSwipe().execute(mail);
@@ -80,7 +90,10 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
                     setNewProfile(b);
                 } else {
                     fin = true;
-                    Log.i("Swipe", "Plus d'étudiant");
+                    getSupportFragmentManager().beginTransaction().remove(profileF).commit();
+                    sadStudent.setVisibility(View.VISIBLE);
+                    tvNoProfile.setVisibility(View.VISIBLE);
+                    bMoreProfile.setVisibility(View.VISIBLE);
                 }
                 break;
             case R.id.like:
@@ -103,10 +116,18 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
                     setNewProfile(b);
                 } else {
                     fin = true;
-                    Log.i("Swipe", "Plus d'étudiant");
+                    getSupportFragmentManager().beginTransaction().remove(profileF).commit();
+                    sadStudent.setVisibility(View.VISIBLE);
+                    tvNoProfile.setVisibility(View.VISIBLE);
+                    bMoreProfile.setVisibility(View.VISIBLE);
                 }
                 break;
-                
+            case R.id.bMoreProfile:
+                sadStudent.setVisibility(View.INVISIBLE);
+                tvNoProfile.setVisibility(View.INVISIBLE);
+                bMoreProfile.setVisibility(View.INVISIBLE);
+                new Swipe.AsyncSwipe().execute(mail);
+                fin = false;
         }
     }
 
@@ -152,6 +173,7 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
 
     private class AsyncLike extends AsyncTask<String, String, String> {
         String mail, mailCo;
+
         @Override
         protected String doInBackground(String... params) {
             mail = params[0];
@@ -170,28 +192,26 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
                 back.sendData(conn, query);
 
                 result = back.getData(conn);
-                Log.i("RESULT", result);
             } catch (IOException e) {
                 e.printStackTrace();
             }
             return result;
 
         }
+
         @Override
         protected void onPostExecute(String result) {
-           if(result.equals("MATCH")){
-              Intent i = new Intent(Swipe.this, Match.class);
-              i.putExtra("mail",mail);
-              i.putExtra("mailCo", mailCo);
+            if (result.equals("MATCH")) {
+                Intent i = new Intent(Swipe.this, Match.class);
+                i.putExtra("mail", mail);
+                i.putExtra("mailCo", mailCo);
 
-                  i.putExtra("pic", picStudent);
+                i.putExtra("pic", picStudent);
 
-               startActivity(i);
-           }
+                startActivity(i);
+            }
 
         }
-
-
 
 
     }
@@ -199,7 +219,6 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
     public Bundle buildBundle() {
         Bundle bundle = new Bundle();
         try {
-            Log.i("BUNDEL NUMBER", String.valueOf(arrayStudnent.length() - 1));
             student = arrayStudnent.getJSONObject(arrayStudnent.length() - 1);
 
             String adjs = student.getString("adj1") + " - " +
@@ -209,6 +228,12 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
             bundle.putString("name", student.getString("surname"));
             bundle.putString("adjs", adjs);
             bundle.putString("description", student.getString("description"));
+            try {
+                Log.i("SWIPE PIC", student.getString("pic"));
+                bundle.putString("pic", student.getString("pic"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
 
         } catch (JSONException e) {
@@ -219,8 +244,6 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
     }
 
     public void setNewProfile(Bundle b) {
-
-
         profileF = new FragmentProfile();
         profileF.setArguments(b);
         getSupportFragmentManager().beginTransaction()

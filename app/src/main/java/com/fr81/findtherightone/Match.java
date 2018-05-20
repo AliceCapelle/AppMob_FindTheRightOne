@@ -37,13 +37,7 @@ public class Match  extends AppCompatActivity {
 
             }
         });
-        ColorMatrix matrix;
-        matrix = new ColorMatrix();
-        matrix.setSaturation(0);
-
-        ColorMatrixColorFilter filter;
-        filter = new ColorMatrixColorFilter(matrix);
-        imgMatch.setColorFilter(filter);
+        ToolBox.blackAndWhitePic(imgMatch);
 
 
     }

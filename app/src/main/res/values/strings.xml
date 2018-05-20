@@ -12,4 +12,6 @@
     <string name="editer">Editer</string>
     <string name="profile">Profil</string>
     <string name="confirm">Confirmer</string>
+    <string name="no_more_profile">Tu as vu tous les profiles !</string>
+    <string name="see_profile_again">Revoir les profils</string>
 </resources>
