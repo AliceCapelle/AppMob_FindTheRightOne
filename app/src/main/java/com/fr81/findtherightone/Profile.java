@@ -39,6 +39,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     private ProgressBar p;
     private Button bCloseEdit;
     private boolean editMode = false;
+    private Button bDecoP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +52,12 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         bSwipe = findViewById(R.id.bSwipeP);
         bEdit = findViewById(R.id.bEdit);
         bCloseEdit = findViewById(R.id.bCloseEdit);
+        bDecoP = findViewById(R.id.bDecoP);
 
         bSwipe.setOnClickListener(this);
         bEdit.setOnClickListener(this);
         bCloseEdit.setOnClickListener(this);
+        bDecoP.setOnClickListener(this);
 
         tvDescription = findViewById(R.id.tvDescription);
         tvName = findViewById(R.id.tvName);
@@ -77,6 +80,11 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         EditText etDescription = findViewById(R.id.etDescription);
         TextView tvDescription = findViewById(R.id.tvDescription);
         switch (v.getId()) {
+            case R.id.bDecoP:
+                getSharedPreferences("PREFS", 0).edit().clear().commit();
+                Intent home = new Intent(this, Home.class);
+                startActivity(home);
+                break;
             case R.id.bSwipeP:
                 Intent swipe = new Intent(this, Swipe.class);
                 startActivity(swipe);

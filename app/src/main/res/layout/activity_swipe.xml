@@ -33,6 +33,19 @@
             android:textAllCaps="false"
             android:textColor="@color/darkBleuText"
             android:textSize="20sp" />
+        <Button
+            android:id="@+id/bDecoS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@color/white"
+            android:fontFamily="@font/fjallaone_regular"
+            android:stateListAnimator="@null"
+            android:text="@string/deconect"
+            android:textAllCaps="false"
+            android:textColor="@color/darkBleuText"
+            android:textSize="20sp" />
 
     </LinearLayout>
 

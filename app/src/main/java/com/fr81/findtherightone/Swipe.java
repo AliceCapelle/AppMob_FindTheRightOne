@@ -51,6 +51,7 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
     private TextView tvNoProfile;
     private Button bMoreProfile;
     private Animation shake;
+    private Button bDeco;
 
 
 
@@ -62,16 +63,19 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
 
         sadStudent = findViewById(R.id.ivSadStudent);
         tvNoProfile = findViewById(R.id.tvNoProfile);
-        bMoreProfile = findViewById(R.id.bMoreProfile);
+
 
         bProfile = findViewById(R.id.bProfileS);
         bLike = findViewById(R.id.like);
         bDislike = findViewById(R.id.dislike);
+        bDeco = findViewById(R.id.bDecoS);
+        bMoreProfile = findViewById(R.id.bMoreProfile);
 
         bProfile.setOnClickListener(this);
         bLike.setOnClickListener(this);
         bDislike.setOnClickListener(this);
         bMoreProfile.setOnClickListener(this);
+        bDeco.setOnClickListener(this);
 
         SharedPreferences sharedPreferences = getBaseContext().getSharedPreferences("PREFS", MODE_PRIVATE);
         mail = sharedPreferences.getString("PREFS_MAIL", null);
@@ -88,6 +92,11 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.bDecoS:
+                getSharedPreferences("PREFS", 0).edit().clear().commit();
+                Intent home = new Intent(this, Home.class);
+                startActivity(home);
+                break;
             case R.id.bProfileS:
                 Intent profile = new Intent(this, Profile.class);
                 startActivity(profile);
@@ -141,6 +150,7 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
                 bMoreProfile.setVisibility(View.INVISIBLE);
                 new Swipe.AsyncSwipe().execute(mail);
                 fin = false;
+                break;
         }
     }
 
