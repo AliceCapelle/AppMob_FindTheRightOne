@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -30,8 +31,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     private ImageView loginLogo;
     private BackendConnection b;
     private static final String PREFS_MAIL = "PREFS_MAIL";
+    private static final String PREFS_CO = "PREFS_CO";
     SharedPreferences sharedPreferences;
     private static final String PREFS = "PREFS";
+    private CheckBox cbStayConnected;
+    private Boolean stayConnected = false;
 
     /**
      * Main UI thread. We set the view, and get the text entered when the button
@@ -47,6 +51,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         etEmail = findViewById(R.id.etMailL);
         etPassword = findViewById(R.id.etPasswordL);
 
+        cbStayConnected = findViewById(R.id.cbStayConnected);
 
         buttonLogin = findViewById(R.id.okLoginButton);
         buttonHome = findViewById(R.id.bHomeL);
@@ -132,11 +137,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         protected void onPostExecute(String result) {
             if(result.equals("OK") || result.equals("FIRST")){
                 sharedPreferences = getBaseContext().getSharedPreferences(PREFS, MODE_PRIVATE);
-
+                if(cbStayConnected.isChecked())
+                    stayConnected = true;
                 if (!sharedPreferences.contains(PREFS_MAIL)) {
                     sharedPreferences
                             .edit()
                             .putString(PREFS_MAIL, userMail)
+                            .putBoolean(PREFS_CO, stayConnected)
                             .apply();
 
                 }

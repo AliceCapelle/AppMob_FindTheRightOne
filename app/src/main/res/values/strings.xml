@@ -17,4 +17,5 @@
     <string name="description">Description</string>
     <string name="adj_layout">Adjectif - Adjectif - Adjectif</string>
     <string name="name">Nom</string>
+    <string name="stay_connected">Rester connecté</string>
 </resources>

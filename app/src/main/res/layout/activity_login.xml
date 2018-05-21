@@ -12,7 +12,7 @@
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/etPasswordL"
-        android:layout_marginBottom="186dp"
+        android:layout_marginBottom="200dp"
         android:background="@drawable/edit_text_border"
         android:ems="10"
         android:fontFamily="@font/fjallaone_regular"
@@ -29,7 +29,7 @@
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="96dp"
+        android:layout_marginBottom="110dp"
         android:background="@drawable/edit_text_border"
         android:ems="10"
         android:fontFamily="@font/fjallaone_regular"
@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="14dp"
         android:background="@color/bleuButton"
         android:fontFamily="@font/fjallaone_regular"
         android:text="@string/login"
@@ -60,9 +60,8 @@
         android:id="@+id/ivLoginLogo"
         android:layout_width="328dp"
         android:layout_height="283dp"
-        android:layout_alignParentTop="true"
+        android:layout_above="@+id/etMailL"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="55dp"
         android:contentDescription="Logo"
         app:srcCompat="@mipmap/login" />
 
@@ -116,7 +115,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/etMailL"
-        android:layout_marginBottom="244dp"
+        android:layout_marginBottom="258dp"
         android:fontFamily="@font/fjallaone_regular"
         android:text="@string/email"
         android:textColor="@color/colorAccent"
@@ -128,10 +127,22 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/etMailL"
-        android:layout_marginBottom="155dp"
+        android:layout_marginBottom="168dp"
         android:fontFamily="@font/fjallaone_regular"
         android:text="@string/mdp"
         android:textColor="@color/colorAccent"
+        android:textSize="15sp" />
+
+    <CheckBox
+        android:id="@+id/cbStayConnected"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/ivLoginLogo"
+        android:layout_marginBottom="71dp"
+        android:fontFamily="@font/fjallaone_regular"
+        android:text="@string/stay_connected"
+        android:textColor="@color/textPrimary"
         android:textSize="15sp" />
 
 </RelativeLayout>
