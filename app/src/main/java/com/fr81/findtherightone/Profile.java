@@ -66,12 +66,8 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         String mail = sharedPreferences.getString("PREFS_MAIL", null);
 
         new Profile.AsyncProfil().execute(mail);
-        
-        ColorMatrix matrix = new ColorMatrix();
-        matrix.setSaturation(0);
 
-        ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
-        imgProfile.setColorFilter(filter);
+        ToolBox.blackAndWhitePic(imgProfile);
 
 
     }
