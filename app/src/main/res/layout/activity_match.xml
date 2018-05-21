@@ -6,6 +6,33 @@
     android:layout_height="match_parent"
     android:background="#F5F7FA">
 
+    <Button
+        android:id="@+id/bParler"
+        android:layout_width="191dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:background="@color/backgroundColor"
+        android:fontFamily="@font/fjallaone_regular"
+        android:stateListAnimator="@null"
+        android:text="Parler"
+        android:textColor="@color/textPrimary"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/bContinuer"
+        android:layout_width="191dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:background="@color/backgroundColor"
+        android:fontFamily="@font/fjallaone_regular"
+        android:stateListAnimator="@null"
+        android:text="Continuer"
+        android:textColor="@color/textPrimary"
+        android:textSize="15sp" />
+
     <RelativeLayout
         android:id="@+id/circle2"
         android:layout_width="236dp"
@@ -45,11 +72,27 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="162dp"
+        android:layout_marginBottom="147dp"
         android:fontFamily="@font/fjallaone_regular"
         android:text="Ça commence ici."
         android:textColor="#4152BC"
-        android:textSize="24sp" />
+        android:textSize="30sp" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/bParler"
+        android:background="@color/textPrimary" />
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="1dp"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@color/textPrimary" />
 
 
 </RelativeLayout>
