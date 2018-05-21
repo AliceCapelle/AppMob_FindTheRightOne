@@ -1,6 +1,5 @@
 package com.fr81.findtherightone;
 
-import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,7 +7,6 @@ import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -27,7 +25,6 @@ import org.json.JSONObject;
 
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 
 // TODO: 17/05/18 on affiche fragment plus de profile si numberOfStundent = 0 
@@ -270,7 +267,6 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
         profileF = new FragmentProfile();
         profileF.setArguments(b);
         getSupportFragmentManager().beginTransaction()
-                .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
                 .replace(R.id.profileFragment, profileF)
                 .commit();
     }

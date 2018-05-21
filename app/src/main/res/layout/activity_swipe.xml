@@ -9,11 +9,11 @@
 
     <FrameLayout
         android:id="@+id/profileFragment"
-        android:layout_width="match_parent"
-        android:layout_height="390dp"
-        android:layout_alignParentStart="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="57dp">
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="120dp">
 
     </FrameLayout>
 
@@ -84,19 +84,20 @@
         android:id="@+id/tvNoProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ivSadStudent"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="107dp"
         android:fontFamily="@font/fjallaone_regular"
         android:text="@string/no_more_profile"
         android:textColor="@color/textPrimary"
         android:textSize="18sp"
-        android:visibility="invisible"/>
+        android:visibility="invisible" />
 
     <Button
         android:id="@+id/bMoreProfile"
         android:layout_width="154dp"
         android:layout_height="34dp"
-        android:layout_alignBottom="@+id/profileFragment"
+        android:layout_below="@+id/ivSadStudent"
         android:layout_centerHorizontal="true"
         android:background="@color/bleuButton"
         android:fontFamily="@font/fjallaone_regular"
