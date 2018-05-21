@@ -1,8 +1,10 @@
 package com.fr81.findtherightone;
 
 import android.app.Notification;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -75,8 +77,12 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
         mail = sharedPreferences.getString("PREFS_MAIL", null);
 
 
-        new Swipe.AsyncSwipe().execute(mail);
-
+        if (BackendConnection.isOnline((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))) {
+            new Swipe.AsyncSwipe().execute(mail);
+        }
+        else{
+            Toast.makeText(Swipe.this, "Pas de connection internet !", Toast.LENGTH_SHORT);
+        }
     }
 
     @Override

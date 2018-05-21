@@ -152,6 +152,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                     sharedPreferences
                             .edit()
                             .putString(PREFS_MAIL, userMail)
+                            .putBoolean(PREFS_CO, stayConnected)
                             .apply();
                 }
                 Intent i = new Intent(Login.this, Swipe.class);
