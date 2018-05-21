@@ -26,6 +26,7 @@ public class Match  extends AppCompatActivity {
 
         ImageView imgMatch = findViewById(R.id.imgMatch);
 
+
         Picasso.get().load("http://tinder.student.elwinar.com" + picPath).noFade().into(imgMatch, new Callback() {
             @Override
             public void onSuccess() {
