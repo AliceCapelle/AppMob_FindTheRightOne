@@ -48,7 +48,9 @@ public class ProfileOtherUser extends AppCompatActivity implements View.OnClickL
         tvMatch_Other = findViewById(R.id.tvMatch_Other);
         imgProfile_Other = findViewById(R.id.imgProfile_Other);
 
-        //new Profile.AsyncProfil().execute(mail);
+        Intent intent = getIntent();
+        String mail = intent.getStringExtra("mail");
+        new ProfileOtherUser.AsyncProfileOther().execute(mail);
 
         ColorMatrix matrix = new ColorMatrix();
         matrix.setSaturation(0);

@@ -65,9 +65,9 @@ public class Match  extends AppCompatActivity implements View.OnClickListener {
                 Toast.makeText(Match.this, "développement en cours", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.imgMatch:
-               Intent profile = new Intent(this, Profile.class);
-               profile.putExtra("mail", mail);
-               startActivity(profile);
+               Intent profileother= new Intent(this, ProfileOtherUser.class);
+               profileother.putExtra("mail", mail);
+               startActivity(profileother);
                break;
         }
     }

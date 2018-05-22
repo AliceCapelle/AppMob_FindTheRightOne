@@ -103,8 +103,9 @@ public class RegistrationConfirmation extends AppCompatActivity implements  View
             if(result.equals("OK")) {
                 Intent i = getIntent();
                 txtResult.setVisibility(View.INVISIBLE);
-                tv_Confirmation.setText("Un email de confirmation à était envoyé à " +
-                        i.getStringExtra(Signup.LOGIN) + "@etu.parisdescartes.fr");
+                String confirmation = "Un email de confirmation a été envoyé à à"+
+                        i.getStringExtra(Signup.LOGIN)+"@etu.parisdescartes.fr";
+                tv_Confirmation.setText(confirmation);
                 tv_Confirmation.setVisibility(View.VISIBLE);
                 imgSign_up.setVisibility(View.VISIBLE);
             }

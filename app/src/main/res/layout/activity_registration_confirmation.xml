@@ -7,6 +7,7 @@
     tools:context=".RegistrationConfirmation">
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/white">
@@ -56,19 +57,16 @@
 
     <ImageView
         android:id="@+id/imgSign_Up"
-        android:layout_width="260dp"
-        android:layout_height="286dp"
-        android:layout_marginBottom="229dp"
-        android:layout_marginTop="52dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:srcCompat="@mipmap/singup"
-        tools:layout_editor_absoluteX="62dp" />
+        tools:layout_editor_absoluteX="135dp"
+        tools:layout_editor_absoluteY="184dp" />
 
     <TextView
         android:id="@+id/tv_Confirmation"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="152dp"
@@ -80,6 +78,7 @@
         android:textSize="19sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgSign_Up" />
 
