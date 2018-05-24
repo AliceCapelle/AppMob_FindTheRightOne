@@ -30,7 +30,7 @@
             android:background="@color/white"
             android:fontFamily="@font/fjallaone_regular"
             android:stateListAnimator="@null"
-            android:text="@string/deconect"
+            android:text="Deconnexion"
             android:textAllCaps="false"
             android:textColor="@color/darkBleuText"
             android:textSize="20sp" />
