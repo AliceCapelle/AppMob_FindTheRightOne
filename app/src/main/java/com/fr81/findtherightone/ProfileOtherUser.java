@@ -79,7 +79,7 @@ public class ProfileOtherUser extends AppCompatActivity implements View.OnClickL
             HttpURLConnection conn = null;
             String result = null;
             try {
-                conn = b.connect("https://tinder.student.elwinar.com/controller/profile_other_user.php", "POST");
+                conn = b.connect("https://tinder.student.elwinar.com/controller/profil_other_user.php", "POST");
                 Uri.Builder builder = new Uri.Builder()
                         .appendQueryParameter("mail", strings[0]);
                 String query = builder.build().getEncodedQuery();
