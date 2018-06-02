@@ -37,31 +37,46 @@
             android:textSize="20sp" />
 
     </LinearLayout>
+
     <TextView
         android:id="@+id/register_result"
         android:layout_width="wrap_content"
         android:layout_height="14dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="51dp"
         android:layout_marginStart="52dp"
-        android:layout_marginTop="244dp"
+        android:layout_marginTop="256dp"
         android:text="Votre inscription est en cours de traitement..."
+        app:layout_constraintBottom_toTopOf="@+id/imgSign_Up"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.011" />
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/pBarRegistration"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="168dp"
-        tools:layout_editor_absoluteY="153dp" />
+        android:layout_marginBottom="4dp"
+        android:layout_marginEnd="168dp"
+        android:layout_marginStart="168dp"
+        app:layout_constraintBottom_toTopOf="@+id/imgSign_Up"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/imgSign_Up"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/singup"
-        tools:layout_editor_absoluteX="135dp"
-        tools:layout_editor_absoluteY="184dp" />
+        android:layout_width="189dp"
+        android:layout_height="128dp"
+        android:layout_marginEnd="96dp"
+        android:layout_marginTop="212dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/singup" />
+
 
     <TextView
         android:id="@+id/tv_Confirmation"
@@ -69,17 +84,14 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="152dp"
-        android:layout_marginEnd="158dp"
-        android:layout_marginStart="159dp"
-        android:layout_marginTop="47dp"
+        android:layout_marginBottom="163dp"
+        android:layout_marginTop="38dp"
         android:fontFamily="@font/fjallaone_regular"
-        android:text="TextView"
-        android:textSize="19sp"
+        android:text="Description"
+        android:textColor="@color/textPrimary"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgSign_Up" />
+        app:layout_constraintTop_toBottomOf="@+id/imgSign_Up"
+        tools:layout_editor_absoluteX="153dp" />
 
 </android.support.constraint.ConstraintLayout>

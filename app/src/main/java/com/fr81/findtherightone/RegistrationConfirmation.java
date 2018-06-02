@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ public class RegistrationConfirmation extends AppCompatActivity implements  View
     protected ImageView imgSign_up;
     protected Button bHome;
     protected  Button bLogin;
+    protected ProgressBar pBarRegistration;
     //END
     private BackendConnection backend;
 
@@ -39,6 +41,8 @@ public class RegistrationConfirmation extends AppCompatActivity implements  View
         //ADD Tibo
         tv_Confirmation=findViewById(R.id.tv_Confirmation);
         imgSign_up = findViewById(R.id.imgSign_Up);
+        pBarRegistration = findViewById(R.id.pBarRegistration);
+        pBarRegistration.setVisibility(View.VISIBLE);
         tv_Confirmation.setVisibility(View.INVISIBLE);
         imgSign_up.setVisibility(View.INVISIBLE);
         //END
@@ -102,8 +106,9 @@ public class RegistrationConfirmation extends AppCompatActivity implements  View
         protected void onPostExecute(String result) {
             if(result.equals("OK")) {
                 Intent i = getIntent();
+                pBarRegistration.setVisibility(View.INVISIBLE);
                 txtResult.setVisibility(View.INVISIBLE);
-                String confirmation = "Un email de confirmation a été envoyé à à"+
+                String confirmation = "Un email de confirmation a été envoyé à "+
                         i.getStringExtra(Signup.LOGIN)+"@etu.parisdescartes.fr";
                 tv_Confirmation.setText(confirmation);
                 tv_Confirmation.setVisibility(View.VISIBLE);
