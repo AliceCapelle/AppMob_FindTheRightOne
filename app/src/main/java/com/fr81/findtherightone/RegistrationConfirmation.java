@@ -45,6 +45,10 @@ public class RegistrationConfirmation extends AppCompatActivity implements  View
         pBarRegistration.setVisibility(View.VISIBLE);
         tv_Confirmation.setVisibility(View.INVISIBLE);
         imgSign_up.setVisibility(View.INVISIBLE);
+        bHome = findViewById(R.id.bHomeC);
+        bLogin = findViewById(R.id.bLoginC);
+        bHome.setOnClickListener(this);
+        bLogin.setOnClickListener(this);
         //END
         txtResult = (TextView)findViewById(R.id.register_result);
         mail    = i.getStringExtra(Signup.LOGIN);
@@ -65,9 +69,11 @@ public class RegistrationConfirmation extends AppCompatActivity implements  View
             case R.id.bHomeC:
                 Intent intentH = new Intent(this, Home.class);
                 startActivity(intentH);
+                break;
             case R.id.bLoginC:
                 Intent intentL = new Intent(this, Login.class);
                 startActivity(intentL);
+                break;
 
         }
     }
