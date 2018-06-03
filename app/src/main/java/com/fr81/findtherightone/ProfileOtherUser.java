@@ -50,6 +50,7 @@ public class ProfileOtherUser extends AppCompatActivity implements View.OnClickL
 
         Intent intent = getIntent();
         String mail = intent.getStringExtra("mail");
+        Log.i("profileotheruser",mail);
         new ProfileOtherUser.AsyncProfileOther().execute(mail);
 
         ColorMatrix matrix = new ColorMatrix();
@@ -103,7 +104,7 @@ public class ProfileOtherUser extends AppCompatActivity implements View.OnClickL
                 Log.i("profilotheruser", result);
                 JSONObject json = new JSONObject(result.toString());
                 JSONObject info_other_student = json.getJSONObject("student");
-                Log.i("profilother_user", json.toString());
+                Log.i("profilotheruser", json.toString());
                 Log.i("profilotheruser", info_other_student.toString());
                 tv_Other_Name.setText(info_other_student.getString("surname"));
                 String adjectives_other_student = info_other_student.getString("adj1") + " - " +
