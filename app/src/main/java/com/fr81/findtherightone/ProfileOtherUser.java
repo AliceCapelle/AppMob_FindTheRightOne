@@ -100,11 +100,11 @@ public class ProfileOtherUser extends AppCompatActivity implements View.OnClickL
         @Override
         protected void onPostExecute(String result) {
             try{
-                Log.i("profil_other_user", result);
+                Log.i("profilotheruser", result);
                 JSONObject json = new JSONObject(result.toString());
                 JSONObject info_other_student = json.getJSONObject("student");
-                Log.i("profil_other_user", json.toString());
-                Log.i("profil_other_user", info_other_student.toString());
+                Log.i("profilother_user", json.toString());
+                Log.i("profilotheruser", info_other_student.toString());
                 tv_Other_Name.setText(info_other_student.getString("surname"));
                 String adjectives_other_student = info_other_student.getString("adj1") + " - " +
                         info_other_student.getString("adj2") + " - " +
