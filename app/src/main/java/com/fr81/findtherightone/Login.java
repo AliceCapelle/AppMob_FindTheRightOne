@@ -113,7 +113,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
             String result = null;
 
             try {
-                conn = b.connect("https://tinder.student.elwinar.com/controller/login.php", "POST");
+                conn = b.connect("http://skipti.fr/controller/login.php", "POST");
                 Uri.Builder builder = new Uri.Builder()
                         .appendQueryParameter("mail", params[0])
                         .appendQueryParameter("password", params[1]);
@@ -158,8 +158,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                 Intent i = new Intent(Login.this, Swipe.class);
                 startActivity(i);
             }
+            else if(result.equals("FAIL")){
+                Toast.makeText(Login.this, "Adresse mail ou mot de passe incorrect" , Toast.LENGTH_LONG).show();
+            }
             else{
-                Toast.makeText(Login.this, result , Toast.LENGTH_LONG).show();
+                Toast.makeText(Login.this, "Oops, le serveur à un probleme" , Toast.LENGTH_LONG).show();
             }
 
         }

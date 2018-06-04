@@ -128,7 +128,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
             String result = "fail";
 
             try {
-                conn = b.connect("https://tinder.student.elwinar.com/controller/updateprofile.php", "POST");
+                conn = b.connect("http://skipti.fr/controller/updateprofile.php", "POST");
 
                 Uri.Builder builder = new Uri.Builder()
                         .appendQueryParameter("mail", params[0]);
@@ -170,9 +170,8 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 String picPath = student.getString("pic");
                 picPath = picPath.replace("\\", "/");
                 picPath = picPath.replace("..", "");
-                Log.i("PICTURE", "http://tinder.student.elwinar.com" + picPath);
 
-                Picasso.get().load("http://tinder.student.elwinar.com" + picPath).noFade().into(imgProfile, new Callback() {
+                Picasso.get().load("http://skipti.fr" + picPath).noFade().into(imgProfile, new Callback() {
                     @Override
                     public void onSuccess() {
                         p.setVisibility(View.GONE);

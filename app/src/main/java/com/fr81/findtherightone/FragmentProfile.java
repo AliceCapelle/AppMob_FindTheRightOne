@@ -53,7 +53,7 @@ public class FragmentProfile extends Fragment{
         tvName.setText(name);
         tvAdjs.setText(adjs);
         tvDescription.setText(description);
-        Picasso.get().load("http://tinder.student.elwinar.com" + picPath).noFade().into(ivStudentPic);
+        Picasso.get().load("http://skipti.fr" + picPath).noFade().into(ivStudentPic);
         ToolBox.blackAndWhitePic(ivStudentPic);
     }
 

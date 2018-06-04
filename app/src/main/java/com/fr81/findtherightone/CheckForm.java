@@ -12,7 +12,7 @@ public class CheckForm {
      * @return true if password has 8 characters or more, false otherwise
      */
     public static boolean checkPassword(String p){
-        return p.length()>=8 ? true : false;
+        return p.length() >= 8;
     }
 
     /**
@@ -21,7 +21,7 @@ public class CheckForm {
      * @return true if sting contained dot, false otherwise
      */
     public static boolean checkEmail(String e){
-        return e.contains(".") ? true : false;
+        return e.contains(".");
     }
 
 

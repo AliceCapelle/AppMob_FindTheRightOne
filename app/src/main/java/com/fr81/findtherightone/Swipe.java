@@ -84,6 +84,7 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
         else{
             Toast.makeText(Swipe.this, "Pas de connection internet !", Toast.LENGTH_SHORT);
         }
+
     }
 
     @Override
@@ -159,7 +160,7 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
             String result = "fail";
 
             try {
-                conn = back.connect("https://tinder.student.elwinar.com/controller/swipe.php", "POST");
+                conn = back.connect("http://skipti.fr/controller/swipe.php", "POST");
 
                 Uri.Builder builder = new Uri.Builder()
                         .appendQueryParameter("mail", params[0]);
@@ -184,6 +185,10 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
                     b = buildBundle();
                     setNewProfile(b);
                 }
+                else{
+                    sadStudent.setVisibility(View.VISIBLE);
+                    tvNoProfile.setVisibility(View.VISIBLE);
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -201,7 +206,7 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
             HttpURLConnection conn;
             String result = "fail";
             try {
-                conn = back.connect("https://tinder.student.elwinar.com/controller/like_student.php", "POST");
+                conn = back.connect("http://skipti.fr/controller/like_student.php", "POST");
 
                 Uri.Builder builder = new Uri.Builder()
                         .appendQueryParameter("mail", params[0])
