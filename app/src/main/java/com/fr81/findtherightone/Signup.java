@@ -97,7 +97,7 @@ public class Signup extends AppCompatActivity {
             String result = null;
 
             try {
-                conn = b.connect("https://skipti.fr/controller/student_exists.php", "POST");
+                conn = b.connect("http://skipti.fr/controller/student_exists.php", "POST");
                 Uri.Builder builder = new Uri.Builder()
                         .appendQueryParameter("mail", mail);
 

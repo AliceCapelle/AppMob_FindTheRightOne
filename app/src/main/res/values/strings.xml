@@ -20,4 +20,5 @@
     <string name="stay_connected">Rester connecté</string>
     <string name="deconect">Deconnection</string>
     <string name="votre_inscription_est_en_cours_de_traitement">Votre inscription est en cours de traitement...</string>
+    <string name="valider">Valider</string>
 </resources>

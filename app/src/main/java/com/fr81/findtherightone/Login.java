@@ -28,6 +28,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     private Button buttonLogin;
     private Button buttonHome;
     private Button buttonSignUp;
+    private Button buttonFP;
     private ImageView loginLogo;
     private BackendConnection b;
     private static final String PREFS_MAIL = "PREFS_MAIL";
@@ -56,10 +57,12 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         buttonLogin = findViewById(R.id.okLoginButton);
         buttonHome = findViewById(R.id.bHomeL);
         buttonSignUp = findViewById(R.id.bSignupL);
+        buttonFP = findViewById(R.id.bPwdForgot);
 
         buttonLogin.setOnClickListener(this);
         buttonHome.setOnClickListener(this);
         buttonSignUp.setOnClickListener(this);
+        buttonFP.setOnClickListener(this);
 
 
 
@@ -85,6 +88,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
             case R.id.bSignupL:
                 Intent signup = new Intent(this, Signup.class);
                 startActivity(signup);
+                break;
+            case R.id.bPwdForgot :
+                Intent forgotPwd = new Intent(this, PasswordForgoten.class);
+                startActivity(forgotPwd);
                 break;
         }
     }

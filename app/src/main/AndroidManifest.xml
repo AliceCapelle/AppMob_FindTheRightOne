@@ -47,6 +47,9 @@
         <activity
             android:name=".Match"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".PasswordForgoten"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

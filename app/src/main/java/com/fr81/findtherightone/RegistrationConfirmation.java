@@ -93,7 +93,7 @@ public class RegistrationConfirmation extends AppCompatActivity implements  View
             String result = null;
 
             try {
-                conn = backend.connect("https://skipti.fr/controller/register-confirmation.php", "POST");
+                conn = backend.connect("http://skipti.fr/controller/register-confirmation.php", "POST");
                 Uri.Builder builder = new Uri.Builder()
                         .appendQueryParameter("mail", mail)
                         .appendQueryParameter("password", passwd)
