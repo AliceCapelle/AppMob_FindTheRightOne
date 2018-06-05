@@ -150,7 +150,7 @@
         android:layout_alignEnd="@+id/bEdit"
         android:layout_below="@+id/tvAdjectives"
         android:layout_marginTop="-165dp"
-        android:text="Button"
+        android:text="@string/close"
         android:visibility="invisible" />
 
 

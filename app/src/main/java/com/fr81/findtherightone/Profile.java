@@ -102,7 +102,10 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 else {
                     //Validate
                     bCloseEdit.setVisibility(View.INVISIBLE);
-                    //TODO Connect and update description
+                    String mail = sharedPreferences.getString("PREFS_MAIL", null);
+                    new Profile.AsyncProfil().execute(mail, etDescription.getText().toString());
+                    etDescription.setVisibility(View.INVISIBLE);
+                    tvDescription.setVisibility(View.VISIBLE);
                 }
                 break;
             case R.id.bCloseEdit:
@@ -132,6 +135,9 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
                 Uri.Builder builder = new Uri.Builder()
                         .appendQueryParameter("mail", params[0]);
+
+                if(params.length > 1)
+                    builder.appendQueryParameter("description", params[1]);
 
                 String query = builder.build().getEncodedQuery();
                 b.sendData(conn, query);
