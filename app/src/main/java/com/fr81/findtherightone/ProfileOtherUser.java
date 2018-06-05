@@ -49,7 +49,7 @@ public class ProfileOtherUser extends AppCompatActivity implements View.OnClickL
         imgProfile_Other = findViewById(R.id.imgProfile_Other);
 
         Intent intent = getIntent();
-        String mail = intent.getStringExtra("mail");
+        String mail = getIntent().getStringExtra("mail");
         Log.i("profileotheruser",mail);
         new ProfileOtherUser.AsyncProfileOther().execute(mail);
 

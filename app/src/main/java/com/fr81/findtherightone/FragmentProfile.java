@@ -27,6 +27,7 @@ public class FragmentProfile extends Fragment implements View.OnClickListener{
     private String name;
     private String adjs;
     private String description;
+    private String mail;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,6 +47,7 @@ public class FragmentProfile extends Fragment implements View.OnClickListener{
         name = getArguments().getString("name");
         adjs = getArguments().getString("adjs");
         description = getArguments().getString("description");
+        mail = getArguments().getString("mail");
         String picPath = getArguments().getString("pic");
         picPath = picPath.replace("\\", "/");
         picPath = picPath.replace("..", "");
@@ -65,6 +67,7 @@ public class FragmentProfile extends Fragment implements View.OnClickListener{
         switch (view.getId()){
             case R.id.ivStudentPic:
                 Intent signup = new Intent(getActivity(), ProfileOtherUser.class);
+                signup.putExtra("mail", mail);
                 startActivity(signup);
                 break;
         }
