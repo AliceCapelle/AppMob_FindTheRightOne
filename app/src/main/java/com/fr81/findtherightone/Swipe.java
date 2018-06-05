@@ -253,6 +253,8 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
             bundle.putString("name", student.getString("surname"));
             bundle.putString("adjs", adjs);
             bundle.putString("description", student.getString("description"));
+            bundle.putString("mail", student.getString("email"));
+
             try {
                 Log.i("SWIPE PIC", student.getString("pic"));
                 bundle.putString("pic", student.getString("pic"));

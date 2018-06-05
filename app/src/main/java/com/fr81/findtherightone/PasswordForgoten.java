@@ -10,7 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -26,6 +29,9 @@ public class PasswordForgoten extends AppCompatActivity implements View.OnClickL
     private Button homeButton;
     private Button loginButton;
     private BackendConnection b;
+    private TextView hintEmailFP;
+    private TextView tvSuccesFP;
+    private TextView descartesMail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +42,9 @@ public class PasswordForgoten extends AppCompatActivity implements View.OnClickL
         passwordForgotButton = findViewById(R.id.okForgotButton);
         homeButton = findViewById(R.id.bHomeFP);
         loginButton = findViewById(R.id.bLoginFP);
+        hintEmailFP = findViewById(R.id.hintEmailFP);
+        tvSuccesFP = findViewById(R.id.tvSuccesFP);
+        descartesMail = findViewById(R.id.descartesMail);
 
         passwordForgotButton.setOnClickListener(this);
         homeButton.setOnClickListener(this);
@@ -92,6 +101,12 @@ public class PasswordForgoten extends AppCompatActivity implements View.OnClickL
         //todo : ajouter echo dans le php, afficher page si succes ou toast si fail
         @Override
         protected void onPostExecute(String result) {
+            mail.setVisibility(View.INVISIBLE);
+            passwordForgotButton.setVisibility(View.INVISIBLE);
+            hintEmailFP.setVisibility(View.INVISIBLE);
+            descartesMail.setVisibility(View.INVISIBLE);
+            tvSuccesFP.setVisibility(View.VISIBLE);
+
             Toast.makeText(PasswordForgoten.this, "Email envoyé !", Toast.LENGTH_LONG).show();
         }
     }
