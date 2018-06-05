@@ -102,6 +102,13 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
             case R.id.dislike:
                 shake = AnimationUtils.loadAnimation(this, R.anim.shake);
                 bDislike.startAnimation(shake);
+                if (!fin) {
+                    try {
+                        new AsyncDislike().execute(student.getString("email"), mail);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
                 arrayStudnent.remove(arrayStudnent.length() - 1);
                 if (arrayStudnent.length() > 0) {
                     b = buildBundle();
@@ -237,9 +244,51 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
             }
 
         }
-
-
     }
+
+    private class AsyncDislike extends AsyncTask<String, String, String> {
+        String mail, mailCo;
+
+        @Override
+        protected String doInBackground(String... params) {
+            mail = params[0];
+            mailCo = params[1];
+            HttpURLConnection conn;
+            String result = "fail";
+            try {
+                conn = back.connect("http://skipti.fr/controller/dislike_student.php", "POST");
+
+                Uri.Builder builder = new Uri.Builder()
+                        .appendQueryParameter("mail", params[0])
+                        .appendQueryParameter("mail_co", params[1]);
+
+
+                String query = builder.build().getEncodedQuery();
+                back.sendData(conn, query);
+
+                result = back.getData(conn);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return result;
+
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            if (result.equals("MATCH")) {
+                Intent i = new Intent(Swipe.this, Match.class);
+                i.putExtra("mail", mail);
+                i.putExtra("mailCo", mailCo);
+
+                i.putExtra("pic", picStudent);
+
+                startActivity(i);
+            }
+
+        }
+    }
+
 
     public Bundle buildBundle() {
         Bundle bundle = new Bundle();
