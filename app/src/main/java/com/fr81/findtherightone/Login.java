@@ -8,8 +8,8 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -19,6 +19,9 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 
+/**
+ * Class to make user log in app
+ */
 // TODO: 09/05/2018 Write log in external file
 public class Login extends AppCompatActivity implements View.OnClickListener{
 
@@ -90,7 +93,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                 startActivity(signup);
                 break;
             case R.id.bPwdForgot :
-                Intent forgotPwd = new Intent(this, PasswordForgoten.class);
+                Intent forgotPwd = new Intent(this, PasswordForgotten.class);
                 startActivity(forgotPwd);
                 break;
         }
@@ -130,6 +133,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                 result = b.getData(conn);
             } catch (IOException e) {
                 e.printStackTrace();
+            } catch (ServerException e) {
+                Toast.makeText(Login.this, "Dev didn't do his job", Toast.LENGTH_SHORT).show();
             }
             return result;
         }
@@ -142,6 +147,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         // TODO: 09/05/2018  if "OK", we launch swipe, if "FIRST", we lauch adj, if "FAIL", we display error
         @Override
         protected void onPostExecute(String result) {
+            result.replace("\n", "");
             if(result.equals("OK") || result.equals("FIRST")){
                 sharedPreferences = getBaseContext().getSharedPreferences(PREFS, MODE_PRIVATE);
                 if(cbStayConnected.isChecked())

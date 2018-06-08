@@ -14,6 +14,9 @@ import android.widget.Toast;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+/**
+ * Class to display an activity when two users match (they both liked each other)
+ */
 public class Match  extends AppCompatActivity implements View.OnClickListener {
     private Button btnContinuer, btnParler;
     private String mail;

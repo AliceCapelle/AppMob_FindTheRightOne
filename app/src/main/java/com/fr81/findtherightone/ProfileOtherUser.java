@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -21,6 +22,9 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 
+/**
+ * Class to display activity of profile of other student
+ */
 public class ProfileOtherUser extends AppCompatActivity implements View.OnClickListener {
     private BackendConnection b = new BackendConnection();
     private TextView tvDescription_Other;
@@ -90,6 +94,8 @@ public class ProfileOtherUser extends AppCompatActivity implements View.OnClickL
 
             } catch (IOException e) {
                 e.printStackTrace();
+            } catch (ServerException e) {
+                Toast.makeText(ProfileOtherUser.this, "Dev didn't do his job", Toast.LENGTH_SHORT).show();
             }
             return result;
         }

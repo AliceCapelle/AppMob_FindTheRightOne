@@ -2,6 +2,7 @@ package com.fr81.findtherightone;
 
 /**
  * Created by acapelle on 11/05/2018.
+ * Various method to check if entered text is good according to our critters
  */
 
 public class CheckForm {

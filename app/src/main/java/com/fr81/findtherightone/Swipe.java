@@ -29,6 +29,10 @@ import java.net.HttpURLConnection;
 
 // TODO: 17/05/18 on affiche fragment plus de profile si numberOfStundent = 0 
 
+/**
+ * Class to handle swipe
+ */
+
 public class Swipe extends AppCompatActivity implements View.OnClickListener {
 
     private Button bProfile;
@@ -178,6 +182,8 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
                 result = back.getData(conn);
             } catch (IOException e) {
                 e.printStackTrace();
+            } catch (ServerException e) {
+                Toast.makeText(Swipe.this, "Dev didn't do his job", Toast.LENGTH_SHORT).show();
             }
             return result;
 
@@ -226,6 +232,8 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
                 result = back.getData(conn);
             } catch (IOException e) {
                 e.printStackTrace();
+            } catch (ServerException e) {
+                Toast.makeText(Swipe.this, "Dev didn't do his job", Toast.LENGTH_SHORT).show();
             }
             return result;
 
@@ -233,6 +241,7 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
 
         @Override
         protected void onPostExecute(String result) {
+            result.replace("\n","");
             if (result.equals("MATCH")) {
                 Intent i = new Intent(Swipe.this, Match.class);
                 i.putExtra("mail", mail);
@@ -269,24 +278,13 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
                 result = back.getData(conn);
             } catch (IOException e) {
                 e.printStackTrace();
+            } catch (ServerException e) {
+                Toast.makeText(Swipe.this, "Dev didn't do his job", Toast.LENGTH_SHORT).show();
             }
             return result;
 
         }
 
-        @Override
-        protected void onPostExecute(String result) {
-            if (result.equals("MATCH")) {
-                Intent i = new Intent(Swipe.this, Match.class);
-                i.putExtra("mail", mail);
-                i.putExtra("mailCo", mailCo);
-
-                i.putExtra("pic", picStudent);
-
-                startActivity(i);
-            }
-
-        }
     }
 
 

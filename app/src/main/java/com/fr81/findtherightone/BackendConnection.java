@@ -81,7 +81,7 @@ public class BackendConnection {
      * @return String echo by server
      * @throws IOException
      */
-    public static String getData(HttpURLConnection conn) throws IOException {
+    public static String getData(HttpURLConnection conn) throws IOException, ServerException {
         int response_code = 0;
         response_code = conn.getResponseCode();
         StringBuilder result = null;
@@ -95,6 +95,8 @@ public class BackendConnection {
                 result.append(line);
             }
         }
+        if(result == null)
+            throw new ServerException();
         return result.toString();
     }
 }

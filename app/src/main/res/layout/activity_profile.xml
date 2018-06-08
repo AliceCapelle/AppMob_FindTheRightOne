@@ -44,20 +44,18 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:layout_marginEnd="30dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="66dp"
+        android:fontFamily="@font/fjallaone_regular"
         android:text="Matchs"
         android:textColor="@color/darkBleuText"
-        android:fontFamily="@font/fjallaone_regular"
-        android:textSize="20sp"/>
+        android:textSize="20sp" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/imgProfile"
         android:layout_width="142dp"
         android:layout_height="142dp"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/tvMatch"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="144dp"
         android:visibility="visible"
         app:civ_border_color="#707070"
         app:civ_border_width="0.1dp" />
@@ -70,7 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="186dp"
+        android:layout_marginTop="143dp"
         android:visibility="invisible" />
 
 
@@ -78,9 +76,7 @@
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="223dp"
+        android:layout_centerInParent="true"
         android:fontFamily="@font/fjallaone_regular"
         android:text="Name"
         android:textColor="@color/textAccent"
@@ -90,9 +86,8 @@
         android:id="@+id/tvAdjectives"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/tvName"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="165dp"
         android:fontFamily="@font/fjallaone_regular"
         android:text="Adj - Adj - Adj"
         android:textColor="@color/textPrimary"
@@ -102,10 +97,10 @@
         android:id="@+id/tvDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_alignBaseline="@+id/etDescription"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="114dp"
         android:fontFamily="@font/segoeui"
+        android:maxLength="280"
         android:text="Description"
         android:textColor="@color/textPrimary"
         android:textSize="18sp" />
@@ -138,7 +133,7 @@
         android:layout_height="88dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="62dp"
+        android:layout_marginBottom="131dp"
         android:ems="10"
         android:inputType="textMultiLine"
         android:visibility="invisible" />

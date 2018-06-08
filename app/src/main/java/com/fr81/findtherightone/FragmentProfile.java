@@ -17,6 +17,9 @@ import com.squareup.picasso.Picasso;
 import org.w3c.dom.Text;
 
 
+/**
+ * Fragment of the profile display in swipe
+ */
 public class FragmentProfile extends Fragment implements View.OnClickListener{
 
     private TextView tvName;

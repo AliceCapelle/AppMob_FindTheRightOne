@@ -8,21 +8,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
 
 /**
+ * Class to handle forgotten password
  * Created by acapelle on 04/06/2018.
  */
 
-public class PasswordForgoten extends AppCompatActivity implements View.OnClickListener {
+public class PasswordForgotten extends AppCompatActivity implements View.OnClickListener {
 
     private EditText mail;
     private Button passwordForgotButton;
@@ -74,7 +71,6 @@ public class PasswordForgoten extends AppCompatActivity implements View.OnClickL
 
         /**
          * Request server to know if mail is already used or not
-         *
          * @param params mail
          * @return
          */
@@ -94,11 +90,16 @@ public class PasswordForgoten extends AppCompatActivity implements View.OnClickL
                 result = b.getData(conn);
             } catch (IOException e) {
                 e.printStackTrace();
+            } catch (ServerException e) {
+                Toast.makeText(PasswordForgotten.this, "Dev didn't do his job", Toast.LENGTH_SHORT).show();
             }
             return result;
         }
 
-        //todo : ajouter echo dans le php, afficher page si succes ou toast si fail
+        /**
+         * Display in front that email have been sent
+         * @param result echo from server
+         */
         @Override
         protected void onPostExecute(String result) {
             mail.setVisibility(View.INVISIBLE);
@@ -107,7 +108,7 @@ public class PasswordForgoten extends AppCompatActivity implements View.OnClickL
             descartesMail.setVisibility(View.INVISIBLE);
             tvSuccesFP.setVisibility(View.VISIBLE);
 
-            Toast.makeText(PasswordForgoten.this, "Email envoyé !", Toast.LENGTH_LONG).show();
+            Toast.makeText(PasswordForgotten.this, "Email envoyé !", Toast.LENGTH_LONG).show();
         }
     }
 }

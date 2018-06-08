@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 
 /**
+ * Class to handle signup
  * Created by acapelle on 09/05/2018.
  */
 
@@ -106,12 +107,15 @@ public class Signup extends AppCompatActivity {
                 result = b.getData(conn);
             } catch (IOException e) {
                 e.printStackTrace();
+            } catch (ServerException e) {
+                Toast.makeText(Signup.this, "Dev didn't do his job", Toast.LENGTH_SHORT).show();
             }
             return result;
         }
 
         @Override
         protected void onPostExecute(String result) {
+            result.replace("\n", "");
             if(result.equals("OK")){
                 Intent i = new Intent(Signup.this, RegistrationConfirmation.class);
                 i.putExtra(Signup.LOGIN, mail);

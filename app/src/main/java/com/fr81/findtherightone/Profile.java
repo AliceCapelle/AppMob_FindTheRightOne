@@ -24,7 +24,9 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 
-
+/**
+ * Class for profile activity
+ */
 public class Profile extends AppCompatActivity implements View.OnClickListener {
 
     private BackendConnection b = new BackendConnection();
@@ -145,6 +147,8 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 result = b.getData(conn);
             } catch (IOException e) {
                 e.printStackTrace();
+            } catch (ServerException e) {
+                Toast.makeText(Profile.this, "Dev didn't do his job", Toast.LENGTH_SHORT).show();
             }
             return result;
         }

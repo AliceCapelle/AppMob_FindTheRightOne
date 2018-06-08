@@ -13,17 +13,23 @@ public class WelcomeScreen extends AppCompatActivity{
         setContentView(R.layout.activity_welcome_screen);
 
         if(isConnected()){
-
             Intent swipe = new Intent(WelcomeScreen.this, Swipe.class);
             startActivity(swipe);
+            finish();
         }
         else {
             Intent home = new Intent(WelcomeScreen.this, Home.class);
             startActivity(home);
+            finish();
         }
 
     }
 
+    /**
+     * Method to know if user was previously connected and choosed to
+     * stay connected
+     * @return true if already connected, false otherwise
+     */
     public Boolean isConnected(){
         SharedPreferences sharedPreferences = getBaseContext().getSharedPreferences("PREFS", MODE_PRIVATE);
         Boolean co = sharedPreferences.getBoolean("PREFS_CO", false);

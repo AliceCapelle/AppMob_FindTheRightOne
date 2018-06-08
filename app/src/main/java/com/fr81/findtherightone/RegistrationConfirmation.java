@@ -104,12 +104,15 @@ public class RegistrationConfirmation extends AppCompatActivity implements  View
                 result = backend.getData(conn);
             } catch (IOException e) {
                 e.printStackTrace();
+            } catch (ServerException e) {
+                Toast.makeText(RegistrationConfirmation.this, "Dev didn't do his job", Toast.LENGTH_SHORT).show();
             }
             return result;
         }
 
         @Override
         protected void onPostExecute(String result) {
+            result.replace("\n", "");
             if(result.equals("OK")) {
                 Intent i = getIntent();
                 pBarRegistration.setVisibility(View.INVISIBLE);

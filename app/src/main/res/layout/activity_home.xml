@@ -11,11 +11,12 @@
 
     <Button
         android:id="@+id/signupButton"
-        android:layout_width="wrap_content"
+        android:layout_width="114dp"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/tvTitle"
         android:layout_alignTop="@+id/loginButton"
-        android:layout_marginBottom="26dp"
+        android:layout_marginRight="67dp"
+        android:layout_marginStart="-22dp"
+        android:layout_toEndOf="@+id/tvTitle"
         android:background="@color/backgroundColor"
         android:fontFamily="@font/fjallaone_regular"
         android:stateListAnimator="@null"
