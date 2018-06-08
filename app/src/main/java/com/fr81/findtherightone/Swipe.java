@@ -268,8 +268,8 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
                 conn = back.connect("http://skipti.fr/controller/dislike_student.php", "POST");
 
                 Uri.Builder builder = new Uri.Builder()
-                        .appendQueryParameter("mail", params[0])
-                        .appendQueryParameter("mail_co", params[1]);
+                        .appendQueryParameter("mail", mail)
+                        .appendQueryParameter("mail_co", mailCo);
 
 
                 String query = builder.build().getEncodedQuery();

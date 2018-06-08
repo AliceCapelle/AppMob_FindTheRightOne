@@ -55,7 +55,7 @@
         android:layout_below="@+id/tvAdjSwipe"
         android:layout_centerHorizontal="true"
         android:ellipsize="end"
-        android:fontFamily="@font/opensanscondensed_light"
+        android:fontFamily="@font/segoeui"
         android:gravity="center"
         android:maxLength="280"
         android:maxLines="3"

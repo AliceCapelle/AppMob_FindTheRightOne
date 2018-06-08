@@ -54,7 +54,7 @@
         android:id="@+id/imgProfile"
         android:layout_width="142dp"
         android:layout_height="142dp"
-        android:layout_below="@+id/tvMatch"
+        android:layout_above="@+id/tvName"
         android:layout_centerHorizontal="true"
         android:visibility="visible"
         app:civ_border_color="#707070"
@@ -68,7 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="143dp"
+        android:layout_marginTop="165dp"
         android:visibility="invisible" />
 
 

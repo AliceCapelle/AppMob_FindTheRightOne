@@ -84,7 +84,7 @@ public class ProfileOtherUser extends AppCompatActivity implements View.OnClickL
             HttpURLConnection conn = null;
             String result = null;
             try {
-                conn = b.connect("http://skipti.fr/controller/profil_other_user.php", "POST");
+                conn = b.connect("http://skipti.fr/controller/profile_other_user.php", "POST");
                 Uri.Builder builder = new Uri.Builder()
                         .appendQueryParameter("mail", strings[0]);
                 String query = builder.build().getEncodedQuery();
@@ -95,7 +95,7 @@ public class ProfileOtherUser extends AppCompatActivity implements View.OnClickL
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (ServerException e) {
-                Toast.makeText(ProfileOtherUser.this, "Dev didn't do his job", Toast.LENGTH_SHORT).show();
+                Log.i("Profile other user", "Dev didn't do his job");
             }
             return result;
         }

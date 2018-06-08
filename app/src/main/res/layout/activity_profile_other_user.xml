@@ -30,9 +30,8 @@
         android:id="@+id/imgProfile_Other"
         android:layout_width="182dp"
         android:layout_height="163dp"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/tvMatch_Other"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="123dp"
         android:visibility="visible"
         app:civ_border_color="#707070"
         app:civ_border_width="0.1dp" />
@@ -43,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="186dp"
+        android:layout_marginTop="137dp"
         android:visibility="invisible" />
 
     <TextView
@@ -52,8 +51,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_marginEnd="30dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginEnd="34dp"
+        android:layout_marginTop="57dp"
         android:fontFamily="@font/fjallaone_regular"
         android:text="Matchs"
         android:textColor="@color/darkBleuText"
@@ -65,7 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="228dp"
+        android:layout_marginBottom="246dp"
         android:fontFamily="@font/fjallaone_regular"
         android:text="Name"
         android:textColor="@color/textAccent"
@@ -77,7 +76,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="164dp"
+        android:layout_marginBottom="200dp"
         android:fontFamily="@font/fjallaone_regular"
         android:text="Adj - Adj - Adj"
         android:textColor="@color/textPrimary"
@@ -89,11 +88,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="117dp"
+        android:layout_marginBottom="155dp"
         android:fontFamily="@font/segoeui"
         android:text="Description"
         android:textColor="@color/textPrimary"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:maxLength="280"/>
 
 
 </RelativeLayout>
