@@ -34,7 +34,8 @@ public class ProfileOtherUser extends AppCompatActivity implements View.OnClickL
     private TextView tvMatch_Other;
     private ImageView imgProfile_Other;
     private Button bSwipe_Other;
-    ProgressBar p;
+    private Button bDeco_Other;
+    private ProgressBar p;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,9 @@ public class ProfileOtherUser extends AppCompatActivity implements View.OnClickL
         p = findViewById(R.id.pBProfile_Other);
         p.setVisibility(View.VISIBLE);
         bSwipe_Other = findViewById(R.id.bSwipe_Other);
+        bDeco_Other = findViewById(R.id.bDeco_Other);
         bSwipe_Other.setOnClickListener(this);
+        bDeco_Other.setOnClickListener(this);
 
 
         tv_Other_Name = findViewById(R.id.tv_Other_Name);
@@ -70,9 +73,17 @@ public class ProfileOtherUser extends AppCompatActivity implements View.OnClickL
     // Top menu to navigate on click
     @Override
     public void onClick(View v){
-        if (v.getId() == R.id.bSwipe_Other){
-            Intent Swipe =  new Intent(this, Swipe.class);
-            startActivity(Swipe);
+        switch (v.getId()) {
+            case R.id.bDeco_Other:
+                getSharedPreferences("PREFS", 0).edit().clear().commit();
+                Intent home = new Intent(this, Home.class);
+                startActivity(home);
+                finish();
+                break;
+            case R.id.bSwipe_Other:
+                Intent Swipe = new Intent(this, Swipe.class);
+                startActivity(Swipe);
+                break;
         }
     }
 

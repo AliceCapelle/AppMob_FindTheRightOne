@@ -18,7 +18,7 @@ import com.squareup.picasso.Picasso;
  * Class to display an activity when two users match (they both liked each other)
  */
 public class Match  extends AppCompatActivity implements View.OnClickListener {
-    private Button btnContinuer, btnParler;
+    private Button btnContinuer, btnParler, bSwipe_match, bDeco_match;
     private String mail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +35,14 @@ public class Match  extends AppCompatActivity implements View.OnClickListener {
         ImageView imgMatch = findViewById(R.id.imgMatch);
         btnContinuer = findViewById(R.id.btnContinuer);
         btnParler = findViewById(R.id.btnParler);
+        bSwipe_match = findViewById(R.id.bSwipe_match);
+        bDeco_match = findViewById(R.id.bDeco_match);
 
         btnContinuer.setOnClickListener(this);
         btnParler.setOnClickListener(this);
         imgMatch.setOnClickListener(this);
+        bDeco_match.setOnClickListener(this);
+        bSwipe_match.setOnClickListener(this);
 
         Picasso.get().load("http://tinder.student.elwinar.com" + picPath).noFade().into(imgMatch, new Callback() {
             @Override
@@ -72,6 +76,17 @@ public class Match  extends AppCompatActivity implements View.OnClickListener {
                profileother.putExtra("mail", mail);
                startActivity(profileother);
                break;
+            case R.id.bDeco_match:
+                getSharedPreferences("PREFS", 0).edit().clear().commit();
+                Intent home = new Intent(this, Home.class);
+                startActivity(home);
+                finish();
+                break;
+            case R.id.bSwipe_match:
+                Intent Swipe = new Intent(this, Swipe.class);
+                startActivity(Swipe);
+                break;
+
         }
     }
 }

@@ -98,6 +98,7 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
                 getSharedPreferences("PREFS", 0).edit().clear().commit();
                 Intent home = new Intent(this, Home.class);
                 startActivity(home);
+                finish();
                 break;
             case R.id.bProfileS:
                 Intent profile = new Intent(this, Profile.class);
