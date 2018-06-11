@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
@@ -84,7 +85,7 @@ public class ProfileOtherUser extends AppCompatActivity implements View.OnClickL
             HttpURLConnection conn = null;
             String result = null;
             try {
-                conn = b.connect("http://skipti.fr/controller/profile_other_user.php", "POST");
+                conn = b.connect("http://skipti.fr/controller/profil_other_user.php", "POST");
                 Uri.Builder builder = new Uri.Builder()
                         .appendQueryParameter("mail", strings[0]);
                 String query = builder.build().getEncodedQuery();
@@ -118,15 +119,26 @@ public class ProfileOtherUser extends AppCompatActivity implements View.OnClickL
                         info_other_student.getString("adj3");
                 tvAdjectives_Other.setText(adjectives_other_student);
                 tvDescription_Other.setText(info_other_student.getString("description"));
-                tvMatch_Other.setText(info_other_student.getString("match"));
+
+                String match = json.getString("match") + " match(s)";
+                tvMatch_Other.setText(match);
 
                 String picPath = info_other_student.getString("pic");
                 picPath = picPath.replace("\\", "/");
                 picPath = picPath.replace("..", "");
                 Log.i("PICTURE", "http://skipti.fr" + picPath);
 
-                Picasso.get().load("http://skipti.fr" + picPath).noFade().into(imgProfile_Other);
+                Picasso.get().load("http://skipti.fr" + picPath).noFade().into(imgProfile_Other, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        p.setVisibility(View.GONE);
+                    }
 
+                    @Override
+                    public void onError(Exception e) {
+
+                    }
+                });
 
             }catch (Exception exception) {
                 exception.printStackTrace();

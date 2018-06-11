@@ -30,7 +30,7 @@ import java.net.HttpURLConnection;
 // TODO: 17/05/18 on affiche fragment plus de profile si numberOfStundent = 0 
 
 /**
- * Class to handle swipe
+ * Class to handle swipe, like and dislike
  */
 
 public class Swipe extends AppCompatActivity implements View.OnClickListener {
@@ -201,6 +201,7 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
                 else{
                     sadStudent.setVisibility(View.VISIBLE);
                     tvNoProfile.setVisibility(View.VISIBLE);
+                    fin=true;
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
