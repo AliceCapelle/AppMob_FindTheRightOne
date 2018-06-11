@@ -40,6 +40,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     private static final String PREFS = "PREFS";
     private CheckBox cbStayConnected;
     private Boolean stayConnected = false;
+    private String mail;
 
     /**
      * Main UI thread. We set the view, and get the text entered when the button
@@ -148,36 +149,49 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         @Override
         protected void onPostExecute(String result) {
             result.replace("\n", "");
-            if(result.equals("OK") || result.equals("FIRST")){
+            if(result.equals("OK")){
                 sharedPreferences = getBaseContext().getSharedPreferences(PREFS, MODE_PRIVATE);
                 if(cbStayConnected.isChecked())
                     stayConnected = true;
-                if (!sharedPreferences.contains(PREFS_MAIL)) {
-                    sharedPreferences
-                            .edit()
-                            .putString(PREFS_MAIL, userMail)
-                            .putBoolean(PREFS_CO, stayConnected)
-                            .apply();
-
-                }
-                else{
-                    getSharedPreferences(PREFS, 0).edit().clear().commit();
-                    sharedPreferences
-                            .edit()
-                            .putString(PREFS_MAIL, userMail)
-                            .putBoolean(PREFS_CO, stayConnected)
-                            .apply();
-                }
+                insertSharedPref();
                 Intent i = new Intent(Login.this, Swipe.class);
                 startActivity(i);
             }
             else if(result.equals("FAIL")){
                 Toast.makeText(Login.this, "Adresse mail ou mot de passe incorrect" , Toast.LENGTH_LONG).show();
             }
+            else if(result.equals("FIRST")){
+                sharedPreferences = getBaseContext().getSharedPreferences(PREFS, MODE_PRIVATE);
+                if(cbStayConnected.isChecked())
+                    stayConnected = true;
+                insertSharedPref();
+                Intent i = new Intent(Login.this, StudentTest.class);
+                startActivity(i);
+            }
             else{
                 Toast.makeText(Login.this, "Oops, le serveur à un probleme" , Toast.LENGTH_LONG).show();
             }
 
+        }
+
+    }
+
+    public void insertSharedPref(){
+        if (!sharedPreferences.contains(PREFS_MAIL)) {
+            sharedPreferences
+                    .edit()
+                    .putString(PREFS_MAIL, userMail)
+                    .putBoolean(PREFS_CO, stayConnected)
+                    .apply();
+
+        }
+        else{
+            getSharedPreferences(PREFS, 0).edit().clear().commit();
+            sharedPreferences
+                    .edit()
+                    .putString(PREFS_MAIL, userMail)
+                    .putBoolean(PREFS_CO, stayConnected)
+                    .apply();
         }
 
     }

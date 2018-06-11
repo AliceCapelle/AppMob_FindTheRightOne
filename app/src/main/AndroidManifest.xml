@@ -50,6 +50,9 @@
         <activity
             android:name=".PasswordForgotten"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".StudentTest"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

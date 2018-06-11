@@ -150,7 +150,8 @@
             android:layout_weight="1"
             android:text="@string/dut_1"
             android:fontFamily="@font/fjallaone_regular"
-            android:textColor="@color/textPrimary"/>
+            android:textColor="@color/textPrimary"
+            android:checked="true"/>
 
         <RadioButton
             android:id="@+id/radioButtonDUT2"
