@@ -156,6 +156,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                 insertSharedPref();
                 Intent i = new Intent(Login.this, Swipe.class);
                 startActivity(i);
+                finish();
             }
             else if(result.equals("FAIL")){
                 Toast.makeText(Login.this, "Adresse mail ou mot de passe incorrect" , Toast.LENGTH_LONG).show();
@@ -167,6 +168,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                 insertSharedPref();
                 Intent i = new Intent(Login.this, StudentTest.class);
                 startActivity(i);
+                finish();
             }
             else{
                 Toast.makeText(Login.this, "Oops, le serveur à un probleme" , Toast.LENGTH_LONG).show();
