@@ -135,7 +135,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (ServerException e) {
-                Toast.makeText(Login.this, "Dev didn't do his job", Toast.LENGTH_SHORT).show();
+                Log.i("Profile other user", "Dev didn't do his job");
             }
             return result;
         }

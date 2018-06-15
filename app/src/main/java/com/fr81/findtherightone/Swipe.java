@@ -184,7 +184,7 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (ServerException e) {
-                Toast.makeText(Swipe.this, "Dev didn't do his job", Toast.LENGTH_SHORT).show();
+                Log.i("Swipe", "Dev didn't do his job");
             }
             return result;
 
@@ -235,7 +235,7 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (ServerException e) {
-                Toast.makeText(Swipe.this, "Dev didn't do his job", Toast.LENGTH_SHORT).show();
+                Log.i("Swipe", "Dev didn't do his job");
             }
             return result;
 
@@ -281,7 +281,7 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (ServerException e) {
-                Toast.makeText(Swipe.this, "Dev didn't do his job", Toast.LENGTH_SHORT).show();
+                Log.i("Swipe", "Dev didn't do his job");
             }
             return result;
 

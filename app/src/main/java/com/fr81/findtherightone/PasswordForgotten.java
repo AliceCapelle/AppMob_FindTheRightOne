@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -91,7 +92,7 @@ public class PasswordForgotten extends AppCompatActivity implements View.OnClick
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (ServerException e) {
-                Toast.makeText(PasswordForgotten.this, "Dev didn't do his job", Toast.LENGTH_SHORT).show();
+                Log.i("Password forgotten", "Dev didn't do his job");
             }
             return result;
         }

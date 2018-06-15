@@ -108,7 +108,7 @@ public class Signup extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (ServerException e) {
-                Toast.makeText(Signup.this, "Dev didn't do his job", Toast.LENGTH_SHORT).show();
+                Log.i("Signup", "Dev didn't do his job");
             }
             return result;
         }

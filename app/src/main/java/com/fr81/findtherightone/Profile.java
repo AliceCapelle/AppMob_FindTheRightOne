@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.net.Uri;
@@ -13,6 +14,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +28,8 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 
@@ -49,6 +53,8 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     private Button bDecoP;
     private static final int CAMERA_REQUEST = 1888;
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
+    private byte[] imgArray;
+    private String encodedImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,7 +120,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                     //Validate
                     bCloseEdit.setVisibility(View.INVISIBLE);
                     String mail = sharedPreferences.getString("PREFS_MAIL", null);
-                    new Profile.AsyncProfil().execute(mail, etDescription.getText().toString());
+                    new Profile.AsyncProfil().execute(mail, etDescription.getText().toString(), encodedImage);
                     etDescription.setVisibility(View.INVISIBLE);
                     tvDescription.setVisibility(View.VISIBLE);
                     imgProfile.setOnClickListener(null);
@@ -133,7 +139,10 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     }
 
 
-    private class AsyncProfil extends AsyncTask<String, String, String> {
+
+
+
+        private class AsyncProfil extends AsyncTask<String, String, String> {
 
         /**
          * Call server with post request to retrieve all info needed for the connected student
@@ -151,8 +160,13 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 Uri.Builder builder = new Uri.Builder()
                         .appendQueryParameter("mail", params[0]);
 
-                if(params.length > 1)
+                if(params.length > 1){
                     builder.appendQueryParameter("description", params[1]);
+                    if(params[1] != null){
+                        builder.appendQueryParameter("image", params[2]);
+                    }
+                }
+
 
                 String query = builder.build().getEncodedQuery();
                 b.sendData(conn, query);
@@ -161,7 +175,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (ServerException e) {
-                Toast.makeText(Profile.this, "Dev didn't do his job", Toast.LENGTH_SHORT).show();
+                Log.i("Profile other user", "Dev didn't do his job");
             }
             return result;
         }
@@ -239,64 +253,17 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
+
         protected void onActivityResult(int requestCode, int resultCode, Intent data) {
             if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
                 Bitmap photo = (Bitmap) data.getExtras().get("data");
                 imgProfile.setImageBitmap(photo);
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                photo.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object
+                imgArray = baos.toByteArray();
+                encodedImage = Base64.encodeToString(imgArray, Base64.DEFAULT);
             }
         }
 
 }
 
-
-/*
-public class MyCameraActivity extends Activity {
-    private static final int CAMERA_REQUEST = 1888;
-    private ImageView imageView;
-    private static final int MY_CAMERA_PERMISSION_CODE = 100;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
-        this.imageView = (ImageView)this.findViewById(R.id.imageView1);
-        Button photoButton = (Button) this.findViewById(R.id.button1);
-        photoButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-               if (checkSelfPermission(Manifest.permission.CAMERA)
-                        != PackageManager.PERMISSION_GRANTED) {
-               requestPermissions(new String[]{Manifest.permission.CAMERA},
-                            MY_CAMERA_PERMISSION_CODE);
-                } else {
-                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(cameraIntent, CAMERA_REQUEST);
-                }
-            }
-        });
-    }
-
-@Override
-public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-    super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    if (requestCode == MY_CAMERA_PERMISSION_CODE) {
-           if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
-                Intent cameraIntent = new
-Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(cameraIntent, CAMERA_REQUEST);
-                  } else {
-               Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
-             }
-
-       }
-
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
-            Bitmap photo = (Bitmap) data.getExtras().get("data");
-            imageView.setImageBitmap(photo);
-        }
-    }
-}
- */

@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -105,7 +106,7 @@ public class RegistrationConfirmation extends AppCompatActivity implements  View
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (ServerException e) {
-                Toast.makeText(RegistrationConfirmation.this, "Dev didn't do his job", Toast.LENGTH_SHORT).show();
+                Log.i("Registration", "Dev didn't do his job");
             }
             return result;
         }

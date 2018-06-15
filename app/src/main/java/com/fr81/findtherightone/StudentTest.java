@@ -50,7 +50,7 @@ public class StudentTest extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (ServerException e) {
-                Toast.makeText(StudentTest.this, "Dev didn't do his job", Toast.LENGTH_SHORT).show();
+                Log.i("Test", "Dev didn't do his job");
             }
             return result;
         }
