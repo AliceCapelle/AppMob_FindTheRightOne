@@ -15,6 +15,8 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 
+import javax.net.ssl.HttpsURLConnection;
+
 /**
  * Class to handle forgotten password
  * Created by acapelle on 04/06/2018.
@@ -78,11 +80,11 @@ public class PasswordForgotten extends AppCompatActivity implements View.OnClick
         @Override
         protected String doInBackground(String... params) {
 
-            HttpURLConnection conn = null;
+            HttpsURLConnection conn = null;
             String result = null;
 
             try {
-                conn = b.connect("http://skipti.fr/controller/forgot_passwd.php", "POST");
+                conn = b.connect("https://skipti.fr/controller/forgot_passwd.php", "POST");
                 Uri.Builder builder = new Uri.Builder()
                         .appendQueryParameter("mail", mail.getText().toString());
 

@@ -20,6 +20,8 @@ import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.net.ssl.HttpsURLConnection;
+
 
 public class StudentTest extends AppCompatActivity {
     BackendConnection b;
@@ -38,11 +40,11 @@ public class StudentTest extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            HttpURLConnection conn = null;
+            HttpsURLConnection conn = null;
             String result = "fail";
 
             try {
-                conn = b.connect("http://skipti.fr/controller/get_adjs.php", "POST");
+                conn = b.connect("https://skipti.fr/controller/get_adjs.php", "POST");
 
 
 

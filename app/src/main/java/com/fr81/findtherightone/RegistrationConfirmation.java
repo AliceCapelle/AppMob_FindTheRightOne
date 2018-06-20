@@ -18,6 +18,8 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 
+import javax.net.ssl.HttpsURLConnection;
+
 public class RegistrationConfirmation extends AppCompatActivity implements  View.OnClickListener{
 
     protected String mail;
@@ -90,11 +92,11 @@ public class RegistrationConfirmation extends AppCompatActivity implements  View
         @Override
         protected String doInBackground(String... params) {
 
-            HttpURLConnection conn = null;
+            HttpsURLConnection conn = null;
             String result = null;
 
             try {
-                conn = backend.connect("http://skipti.fr/controller/register-confirmation.php", "POST");
+                conn = backend.connect("https://skipti.fr/controller/register-confirmation.php", "POST");
                 Uri.Builder builder = new Uri.Builder()
                         .appendQueryParameter("mail", mail)
                         .appendQueryParameter("password", passwd)

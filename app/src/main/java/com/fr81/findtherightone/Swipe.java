@@ -27,6 +27,8 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 
+import javax.net.ssl.HttpsURLConnection;
+
 // TODO: 17/05/18 on affiche fragment plus de profile si numberOfStundent = 0 
 
 /**
@@ -168,11 +170,11 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
 
         @Override
         protected String doInBackground(String... params) {
-            HttpURLConnection conn;
+            HttpsURLConnection conn;
             String result = "fail";
 
             try {
-                conn = back.connect("http://skipti.fr/controller/swipe.php", "POST");
+                conn = back.connect("https://skipti.fr/controller/swipe.php", "POST");
 
                 Uri.Builder builder = new Uri.Builder()
                         .appendQueryParameter("mail", params[0]);
@@ -218,10 +220,10 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
         protected String doInBackground(String... params) {
             mail = params[0];
             mailCo = params[1];
-            HttpURLConnection conn;
+            HttpsURLConnection conn;
             String result = "fail";
             try {
-                conn = back.connect("http://skipti.fr/controller/like_student.php", "POST");
+                conn = back.connect("https://skipti.fr/controller/like_student.php", "POST");
 
                 Uri.Builder builder = new Uri.Builder()
                         .appendQueryParameter("mail", params[0])
@@ -264,10 +266,10 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
         protected String doInBackground(String... params) {
             mail = params[0];
             mailCo = params[1];
-            HttpURLConnection conn;
+            HttpsURLConnection conn;
             String result = "fail";
             try {
-                conn = back.connect("http://skipti.fr/controller/dislike_student.php", "POST");
+                conn = back.connect("https://skipti.fr/controller/dislike_student.php", "POST");
 
                 Uri.Builder builder = new Uri.Builder()
                         .appendQueryParameter("mail", mail)

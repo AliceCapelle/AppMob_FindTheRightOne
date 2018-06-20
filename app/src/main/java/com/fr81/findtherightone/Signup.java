@@ -18,6 +18,8 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 
+import javax.net.ssl.HttpsURLConnection;
+
 /**
  * Class to handle signup
  * Created by acapelle on 09/05/2018.
@@ -94,11 +96,11 @@ public class Signup extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
 
-            HttpURLConnection conn = null;
+            HttpsURLConnection conn = null;
             String result = null;
 
             try {
-                conn = b.connect("http://skipti.fr/controller/student_exists.php", "POST");
+                conn = b.connect("https://skipti.fr/controller/student_exists.php", "POST");
                 Uri.Builder builder = new Uri.Builder()
                         .appendQueryParameter("mail", mail);
 

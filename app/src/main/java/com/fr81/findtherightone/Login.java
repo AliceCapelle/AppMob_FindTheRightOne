@@ -19,6 +19,8 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 
+import javax.net.ssl.HttpsURLConnection;
+
 /**
  * Class to make user log in app
  */
@@ -120,11 +122,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         protected String doInBackground(String... params) {
 
 
-            HttpURLConnection conn = null;
+            HttpsURLConnection conn = null;
             String result = null;
 
             try {
-                conn = b.connect("http://skipti.fr/controller/login.php", "POST");
+                conn = b.connect("https://skipti.fr/controller/login.php", "POST");
                 Uri.Builder builder = new Uri.Builder()
                         .appendQueryParameter("mail", params[0])
                         .appendQueryParameter("password", params[1]);
@@ -148,7 +150,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         // TODO: 09/05/2018  if "OK", we launch swipe, if "FIRST", we lauch adj, if "FAIL", we display error
         @Override
         protected void onPostExecute(String result) {
+            //Log.i("LOGIN", result);
             result.replace("\n", "");
+            if(result == null){
+                Toast.makeText(Login.this, "Server is doing sh*t (again)" , Toast.LENGTH_LONG).show();
+            }
             if(result.equals("OK")){
                 sharedPreferences = getBaseContext().getSharedPreferences(PREFS, MODE_PRIVATE);
                 if(cbStayConnected.isChecked())

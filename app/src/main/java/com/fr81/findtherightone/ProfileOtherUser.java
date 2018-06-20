@@ -23,6 +23,8 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 
+import javax.net.ssl.HttpsURLConnection;
+
 /**
  * Class to display activity of profile of other student
  */
@@ -93,10 +95,10 @@ public class ProfileOtherUser extends AppCompatActivity implements View.OnClickL
 
         @Override
         protected String doInBackground(String... strings) {
-            HttpURLConnection conn = null;
+            HttpsURLConnection conn = null;
             String result = null;
             try {
-                conn = b.connect("http://skipti.fr/controller/profil_other_user.php", "POST");
+                conn = b.connect("https://skipti.fr/controller/profil_other_user.php", "POST");
                 Uri.Builder builder = new Uri.Builder()
                         .appendQueryParameter("mail", strings[0]);
                 String query = builder.build().getEncodedQuery();
@@ -137,9 +139,9 @@ public class ProfileOtherUser extends AppCompatActivity implements View.OnClickL
                 String picPath = info_other_student.getString("pic");
                 picPath = picPath.replace("\\", "/");
                 picPath = picPath.replace("..", "");
-                Log.i("PICTURE", "http://skipti.fr" + picPath);
+                Log.i("PICTURE", "https://skipti.fr" + picPath);
 
-                Picasso.get().load("http://skipti.fr" + picPath).noFade().into(imgProfile_Other, new Callback() {
+                Picasso.get().load("https://skipti.fr" + picPath).noFade().into(imgProfile_Other, new Callback() {
                     @Override
                     public void onSuccess() {
                         p.setVisibility(View.GONE);

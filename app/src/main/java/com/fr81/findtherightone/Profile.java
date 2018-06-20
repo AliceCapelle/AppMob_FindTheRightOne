@@ -33,6 +33,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 
+import javax.net.ssl.HttpsURLConnection;
+
 /**
  * Class for profile activity
  */
@@ -151,11 +153,11 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
          */
         @Override
         protected String doInBackground(String... params) {
-            HttpURLConnection conn = null;
+            HttpsURLConnection conn = null;
             String result = "fail";
 
             try {
-                conn = b.connect("http://skipti.fr/controller/updateprofile.php", "POST");
+                conn = b.connect("https://skipti.fr/controller/updateprofile.php", "POST");
 
                 Uri.Builder builder = new Uri.Builder()
                         .appendQueryParameter("mail", params[0]);

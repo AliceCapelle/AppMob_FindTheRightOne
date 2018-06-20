@@ -18,6 +18,8 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
+import javax.net.ssl.HttpsURLConnection;
+
 /**
  * Simple class to help make request to server
  */
@@ -43,13 +45,13 @@ public class BackendConnection {
      * @return HttpURLConnection
      * @throws IOException
      */
-    public static HttpURLConnection connect(String link, String methode) throws IOException {
+    public static HttpsURLConnection connect(String link, String methode) throws IOException {
         final int CONNECTION_TIMEOUT = 10000;
         final int READ_TIMEOUT = 15000;
-        HttpURLConnection conn = null;
+        HttpsURLConnection conn = null;
         URL url = null;
         url = new URL(link);
-        conn = (HttpURLConnection) url.openConnection();
+        conn = (HttpsURLConnection) url.openConnection();
         conn.setReadTimeout(READ_TIMEOUT);
         conn.setConnectTimeout(CONNECTION_TIMEOUT);
         conn.setRequestMethod(methode);
@@ -64,7 +66,7 @@ public class BackendConnection {
      * @param query
      * @throws IOException
      */
-    public static void sendData(HttpURLConnection conn, String query) throws IOException {
+    public static void sendData(HttpsURLConnection conn, String query) throws IOException {
         OutputStream os = conn.getOutputStream();
         BufferedWriter writer = new BufferedWriter(
                 new OutputStreamWriter(os, "UTF-8"));
@@ -81,7 +83,7 @@ public class BackendConnection {
      * @return String echo by server
      * @throws IOException
      */
-    public static String getData(HttpURLConnection conn) throws IOException, ServerException {
+    public static String getData(HttpsURLConnection conn) throws IOException, ServerException {
         int response_code = 0;
         response_code = conn.getResponseCode();
         StringBuilder result = null;

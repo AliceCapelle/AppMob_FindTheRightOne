@@ -44,7 +44,7 @@ public class Match  extends AppCompatActivity implements View.OnClickListener {
         bDeco_match.setOnClickListener(this);
         bSwipe_match.setOnClickListener(this);
 
-        Picasso.get().load("http://tinder.student.elwinar.com" + picPath).noFade().into(imgMatch, new Callback() {
+        Picasso.get().load("https://tinder.student.elwinar.com" + picPath).noFade().into(imgMatch, new Callback() {
             @Override
             public void onSuccess() {
                 Log.i("MATCH", "onSuccess: MATCH PHOTO");
@@ -69,7 +69,7 @@ public class Match  extends AppCompatActivity implements View.OnClickListener {
                 startActivity(swipe);
                 break;
             case R.id.btnParler:
-                Toast.makeText(Match.this, "développement en cours", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Match.this, "Développement en cours", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.imgMatch:
                Intent profileother= new Intent(this, ProfileOtherUser.class);
