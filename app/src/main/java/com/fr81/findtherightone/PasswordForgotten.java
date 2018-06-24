@@ -13,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -74,6 +73,7 @@ public class PasswordForgotten extends AppCompatActivity implements View.OnClick
 
         /**
          * Request server to know if mail is already used or not
+         *
          * @param params mail
          * @return
          */
@@ -101,6 +101,7 @@ public class PasswordForgotten extends AppCompatActivity implements View.OnClick
 
         /**
          * Display in front that email have been sent
+         *
          * @param result echo from server
          */
         @Override

@@ -1,10 +1,7 @@
 package com.fr81.findtherightone;
 
-import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.util.Log;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -14,8 +11,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -29,6 +24,7 @@ public class BackendConnection {
 
     /**
      * Check is network is available to perform server request
+     *
      * @param c object who give state of network connectivity
      * @return
      */
@@ -40,6 +36,7 @@ public class BackendConnection {
 
     /**
      * Initialize request to server
+     *
      * @param link    URL of server page we call
      * @param methode GET or POST
      * @return HttpURLConnection
@@ -62,7 +59,8 @@ public class BackendConnection {
 
     /**
      * Send parameters to server (only for POST)
-     * @param conn HttpURLConnection initialize with connect()
+     *
+     * @param conn  HttpURLConnection initialize with connect()
      * @param query
      * @throws IOException
      */
@@ -79,6 +77,7 @@ public class BackendConnection {
 
     /**
      * Retrieve data from server
+     *
      * @param conn HttpURLConnection initialize with connect()
      * @return String echo by server
      * @throws IOException
@@ -97,7 +96,7 @@ public class BackendConnection {
                 result.append(line);
             }
         }
-        if(result == null)
+        if (result == null)
             throw new ServerException();
         return result.toString();
     }

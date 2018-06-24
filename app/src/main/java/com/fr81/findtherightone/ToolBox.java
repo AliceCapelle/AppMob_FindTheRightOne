@@ -11,9 +11,10 @@ public class ToolBox {
 
     /**
      * Make a pic black and white
+     *
      * @param img
      */
-    public static void blackAndWhitePic(ImageView img){
+    public static void blackAndWhitePic(ImageView img) {
         ColorMatrix matrix;
         matrix = new ColorMatrix();
         matrix.setSaturation(0);

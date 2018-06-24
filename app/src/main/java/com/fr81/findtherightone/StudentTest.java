@@ -22,7 +22,9 @@ import java.util.Random;
 
 import javax.net.ssl.HttpsURLConnection;
 
-
+/**
+ * Class to handle first connection
+ */
 public class StudentTest extends AppCompatActivity {
     BackendConnection b;
     WordCloudView wordCloud;
@@ -38,6 +40,11 @@ public class StudentTest extends AppCompatActivity {
 
     private class AsyncGetAdj extends AsyncTask<String, String, String> {
 
+        /**
+         * Request server to get all the adjs
+         * @param params
+         * @return
+         */
         @Override
         protected String doInBackground(String... params) {
             HttpsURLConnection conn = null;
@@ -57,6 +64,10 @@ public class StudentTest extends AppCompatActivity {
             return result;
         }
 
+        /**
+         * Put adjs in array
+         * @param result
+         */
         @Override
         protected void onPostExecute(String result) {
             Log.i("test", result);

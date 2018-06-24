@@ -18,14 +18,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
 import java.io.IOException;
-import java.net.HttpURLConnection;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -57,7 +54,6 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
     private Button bDeco;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -86,8 +82,7 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
 
         if (BackendConnection.isOnline((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))) {
             new Swipe.AsyncSwipe().execute(mail);
-        }
-        else{
+        } else {
             Toast.makeText(Swipe.this, "Pas de connection internet !", Toast.LENGTH_SHORT);
         }
 
@@ -166,132 +161,11 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
-    private class AsyncSwipe extends AsyncTask<String, String, String> {
-
-        @Override
-        protected String doInBackground(String... params) {
-            HttpsURLConnection conn;
-            String result = "fail";
-
-            try {
-                conn = back.connect("https://skipti.fr/controller/swipe.php", "POST");
-
-                Uri.Builder builder = new Uri.Builder()
-                        .appendQueryParameter("mail", params[0]);
-
-                String query = builder.build().getEncodedQuery();
-                back.sendData(conn, query);
-
-                result = back.getData(conn);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ServerException e) {
-                Log.i("Swipe", "Dev didn't do his job");
-            }
-            return result;
-
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            try {
-                arrayStudnent = new JSONArray(result.toString());
-
-                if (arrayStudnent.length() > 0) {
-                    b = buildBundle();
-                    setNewProfile(b);
-                }
-                else{
-                    sadStudent.setVisibility(View.VISIBLE);
-                    tvNoProfile.setVisibility(View.VISIBLE);
-                    fin=true;
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-        }
-    }
-
-    private class AsyncLike extends AsyncTask<String, String, String> {
-        String mail, mailCo;
-
-        @Override
-        protected String doInBackground(String... params) {
-            mail = params[0];
-            mailCo = params[1];
-            HttpsURLConnection conn;
-            String result = "fail";
-            try {
-                conn = back.connect("https://skipti.fr/controller/like_student.php", "POST");
-
-                Uri.Builder builder = new Uri.Builder()
-                        .appendQueryParameter("mail", params[0])
-                        .appendQueryParameter("mail_co", params[1]);
-
-
-                String query = builder.build().getEncodedQuery();
-                back.sendData(conn, query);
-
-                result = back.getData(conn);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ServerException e) {
-                Log.i("Swipe", "Dev didn't do his job");
-            }
-            return result;
-
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            result.replace("\n","");
-            if (result.equals("MATCH")) {
-                Intent i = new Intent(Swipe.this, Match.class);
-                i.putExtra("mail", mail);
-                i.putExtra("mailCo", mailCo);
-
-                i.putExtra("pic", picStudent);
-
-                startActivity(i);
-            }
-
-        }
-    }
-
-    private class AsyncDislike extends AsyncTask<String, String, String> {
-        String mail, mailCo;
-
-        @Override
-        protected String doInBackground(String... params) {
-            mail = params[0];
-            mailCo = params[1];
-            HttpsURLConnection conn;
-            String result = "fail";
-            try {
-                conn = back.connect("https://skipti.fr/controller/dislike_student.php", "POST");
-
-                Uri.Builder builder = new Uri.Builder()
-                        .appendQueryParameter("mail", mail)
-                        .appendQueryParameter("mail_co", mailCo);
-
-
-                String query = builder.build().getEncodedQuery();
-                back.sendData(conn, query);
-
-                result = back.getData(conn);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ServerException e) {
-                Log.i("Swipe", "Dev didn't do his job");
-            }
-            return result;
-
-        }
-
-    }
-
-
+    /**
+     * Build a bundle with all infos of the other student profile to be display
+     *
+     * @return
+     */
     public Bundle buildBundle() {
         Bundle bundle = new Bundle();
         try {
@@ -321,11 +195,171 @@ public class Swipe extends AppCompatActivity implements View.OnClickListener {
         return bundle;
     }
 
+    /**
+     * Send bundle to new frangment, launch fragment.
+     *
+     * @param b
+     */
     public void setNewProfile(Bundle b) {
         profileF = new FragmentProfile();
         profileF.setArguments(b);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.profileFragment, profileF)
                 .commit();
+    }
+
+    private class AsyncSwipe extends AsyncTask<String, String, String> {
+
+        /**
+         * Request server to get a list of profiles to display
+         *
+         * @param params
+         * @return
+         */
+        @Override
+        protected String doInBackground(String... params) {
+            HttpsURLConnection conn;
+            String result = "fail";
+
+            try {
+                conn = back.connect("https://skipti.fr/controller/swipe.php", "POST");
+
+                Uri.Builder builder = new Uri.Builder()
+                        .appendQueryParameter("mail", params[0]);
+
+                String query = builder.build().getEncodedQuery();
+                back.sendData(conn, query);
+
+                result = back.getData(conn);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ServerException e) {
+                Log.i("Swipe", "Dev didn't do his job");
+            }
+            return result;
+
+        }
+
+        /**
+         * Handle result.
+         * If no profiles, display end picutre in UI.
+         * Otherwise, display profile.
+         *
+         * @param result
+         */
+        @Override
+        protected void onPostExecute(String result) {
+            try {
+                arrayStudnent = new JSONArray(result.toString());
+
+                if (arrayStudnent.length() > 0) {
+                    b = buildBundle();
+                    setNewProfile(b);
+                } else {
+                    sadStudent.setVisibility(View.VISIBLE);
+                    tvNoProfile.setVisibility(View.VISIBLE);
+                    fin = true;
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    private class AsyncLike extends AsyncTask<String, String, String> {
+        String mail, mailCo;
+
+        /**
+         * Inform server that a like has been perform
+         *
+         * @param params
+         * @return
+         */
+        @Override
+        protected String doInBackground(String... params) {
+            mail = params[0];
+            mailCo = params[1];
+            HttpsURLConnection conn;
+            String result = "fail";
+            try {
+                conn = back.connect("https://skipti.fr/controller/like_student.php", "POST");
+
+                Uri.Builder builder = new Uri.Builder()
+                        .appendQueryParameter("mail", params[0])
+                        .appendQueryParameter("mail_co", params[1]);
+
+
+                String query = builder.build().getEncodedQuery();
+                back.sendData(conn, query);
+
+                result = back.getData(conn);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ServerException e) {
+                Log.i("Swipe", "Dev didn't do his job");
+            }
+            return result;
+
+        }
+
+        /**
+         * Handle case of match.
+         * If so, launch match activity.
+         *
+         * @param result
+         */
+        @Override
+        protected void onPostExecute(String result) {
+            result.replace("\n", "");
+            if (result.equals("MATCH")) {
+                Intent i = new Intent(Swipe.this, Match.class);
+                i.putExtra("mail", mail);
+                i.putExtra("mailCo", mailCo);
+
+                i.putExtra("pic", picStudent);
+
+                startActivity(i);
+            }
+
+        }
+    }
+
+    private class AsyncDislike extends AsyncTask<String, String, String> {
+        String mail, mailCo;
+
+        /**
+         * Inform server that a dislike has been perform
+         *
+         * @param params
+         * @return
+         */
+        @Override
+        protected String doInBackground(String... params) {
+            mail = params[0];
+            mailCo = params[1];
+            HttpsURLConnection conn;
+            String result = "fail";
+            try {
+                conn = back.connect("https://skipti.fr/controller/dislike_student.php", "POST");
+
+                Uri.Builder builder = new Uri.Builder()
+                        .appendQueryParameter("mail", mail)
+                        .appendQueryParameter("mail_co", mailCo);
+
+
+                String query = builder.build().getEncodedQuery();
+                back.sendData(conn, query);
+
+                result = back.getData(conn);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ServerException e) {
+                Log.i("Swipe", "Dev didn't do his job");
+            }
+            return result;
+
+        }
+
     }
 }

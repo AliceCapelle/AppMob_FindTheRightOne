@@ -1,8 +1,10 @@
 package com.fr81.findtherightone;
 
-import android.widget.Toast;
+/**
+ * Exception throw when server seems to have troubles
+ */
+public class ServerException extends Exception {
 
-public class ServerException extends Exception{
-
-    public ServerException(){ }
+    public ServerException() {
+    }
 }

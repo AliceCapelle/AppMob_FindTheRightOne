@@ -5,15 +5,14 @@ import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -21,7 +20,6 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -60,7 +58,7 @@ public class ProfileOtherUser extends AppCompatActivity implements View.OnClickL
 
         Intent intent = getIntent();
         String mail = getIntent().getStringExtra("mail");
-        Log.i("profileotheruser",mail);
+        Log.i("profileotheruser", mail);
         new ProfileOtherUser.AsyncProfileOther().execute(mail);
 
         ColorMatrix matrix = new ColorMatrix();
@@ -70,11 +68,11 @@ public class ProfileOtherUser extends AppCompatActivity implements View.OnClickL
         imgProfile_Other.setColorFilter(filter);
 
 
-
     }
+
     // Top menu to navigate on click
     @Override
-    public void onClick(View v){
+    public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bDeco_Other:
                 getSharedPreferences("PREFS", 0).edit().clear().commit();
@@ -90,9 +88,14 @@ public class ProfileOtherUser extends AppCompatActivity implements View.OnClickL
     }
 
 
-
     private class AsyncProfileOther extends AsyncTask<String, String, String> {
 
+        /**
+         * Request data of other user to server
+         *
+         * @param strings email adresse
+         * @return string of info
+         */
         @Override
         protected String doInBackground(String... strings) {
             HttpsURLConnection conn = null;
@@ -116,11 +119,12 @@ public class ProfileOtherUser extends AppCompatActivity implements View.OnClickL
 
         /**
          * Decode json and get element to feed UI
+         *
          * @param result string with all student info
          */
         @Override
         protected void onPostExecute(String result) {
-            try{
+            try {
                 Log.i("profilotheruser", result);
                 JSONObject json = new JSONObject(result.toString());
                 JSONObject info_other_student = json.getJSONObject("student");
@@ -153,7 +157,7 @@ public class ProfileOtherUser extends AppCompatActivity implements View.OnClickL
                     }
                 });
 
-            }catch (Exception exception) {
+            } catch (Exception exception) {
                 exception.printStackTrace();
             }
         }

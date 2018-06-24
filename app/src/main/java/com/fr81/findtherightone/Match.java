@@ -1,8 +1,6 @@
 package com.fr81.findtherightone;
 
 import android.content.Intent;
-import android.graphics.ColorMatrix;
-import android.graphics.ColorMatrixColorFilter;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -17,9 +15,10 @@ import com.squareup.picasso.Picasso;
 /**
  * Class to display an activity when two users match (they both liked each other)
  */
-public class Match  extends AppCompatActivity implements View.OnClickListener {
+public class Match extends AppCompatActivity implements View.OnClickListener {
     private Button btnContinuer, btnParler, bSwipe_match, bDeco_match;
     private String mail;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +51,7 @@ public class Match  extends AppCompatActivity implements View.OnClickListener {
 
             @Override
             public void onError(Exception e) {
-
+                Log.i("Match", "Either the server, the network or the dev is bad. Probably dev.");
             }
         });
         ToolBox.blackAndWhitePic(imgMatch);
@@ -72,10 +71,10 @@ public class Match  extends AppCompatActivity implements View.OnClickListener {
                 Toast.makeText(Match.this, "Développement en cours", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.imgMatch:
-               Intent profileother= new Intent(this, ProfileOtherUser.class);
-               profileother.putExtra("mail", mail);
-               startActivity(profileother);
-               break;
+                Intent profileother = new Intent(this, ProfileOtherUser.class);
+                profileother.putExtra("mail", mail);
+                startActivity(profileother);
+                break;
             case R.id.bDeco_match:
                 getSharedPreferences("PREFS", 0).edit().clear().commit();
                 Intent home = new Intent(this, Home.class);

@@ -6,9 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.ColorMatrix;
-import android.graphics.ColorMatrixColorFilter;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -26,12 +23,12 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.net.HttpURLConnection;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -40,6 +37,8 @@ import javax.net.ssl.HttpsURLConnection;
  */
 public class Profile extends AppCompatActivity implements View.OnClickListener {
 
+    private static final int CAMERA_REQUEST = 1888;
+    private static final int MY_CAMERA_PERMISSION_CODE = 100;
     private BackendConnection b = new BackendConnection();
     private TextView tvDescription;
     private TextView tvName;
@@ -53,8 +52,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     private Button bCloseEdit;
     private boolean editMode = false;
     private Button bDecoP;
-    private static final int CAMERA_REQUEST = 1888;
-    private static final int MY_CAMERA_PERMISSION_CODE = 100;
     private byte[] imgArray;
     private String encodedImage;
 
@@ -108,17 +105,15 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 startActivity(swipe);
                 break;
             case R.id.bEdit:
-                //Toast.makeText(Profile.this, "Pas encore disponible", Toast.LENGTH_SHORT).show();
                 editMode = !editMode;
 
                 //If we want to edit the profile description
-                if(editMode) {
+                if (editMode) {
                     etDescription.setVisibility(View.VISIBLE);
                     tvDescription.setVisibility(View.INVISIBLE);
                     bCloseEdit.setVisibility(View.VISIBLE);
                     imgProfile.setOnClickListener(this);
-                }
-                else {
+                } else {
                     //Validate
                     bCloseEdit.setVisibility(View.INVISIBLE);
                     String mail = sharedPreferences.getString("PREFS_MAIL", null);
@@ -140,14 +135,62 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
+    /**
+     * Function to open camera.
+     * First check if permission granted, then launch intent for camera.
+     * If permission not given, we ask for it.
+     */
+    public void openCamera() {
+        if (checkSelfPermission(Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.CAMERA},
+                    MY_CAMERA_PERMISSION_CODE);
+        } else {
+            Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(cameraIntent, CAMERA_REQUEST);
+        }
+    }
 
+    /**
+     * Ask for camera permission.
+     * If granted, we launch camera, if not, do nothings.
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == MY_CAMERA_PERMISSION_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
+                Intent cameraIntent = new
+                        Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(cameraIntent, CAMERA_REQUEST);
+            } else {
+                Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
+            }
 
+        }
+    }
 
+    /**
+     * Get picture take with camera.
+     * Display it in UI and send it to server.
+     */
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            imgProfile.setImageBitmap(photo);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            photo.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object
+            imgArray = baos.toByteArray();
+            encodedImage = Base64.encodeToString(imgArray, Base64.DEFAULT);
+        }
+    }
 
-        private class AsyncProfil extends AsyncTask<String, String, String> {
+    private class AsyncProfil extends AsyncTask<String, String, String> {
 
         /**
          * Call server with post request to retrieve all info needed for the connected student
+         *
          * @param params take mail of student
          * @return
          */
@@ -162,9 +205,9 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 Uri.Builder builder = new Uri.Builder()
                         .appendQueryParameter("mail", params[0]);
 
-                if(params.length > 1){
+                if (params.length > 1) {
                     builder.appendQueryParameter("description", params[1]);
-                    if(params[1] != null){
+                    if (params[1] != null) {
                         builder.appendQueryParameter("image", params[2]);
                     }
                 }
@@ -184,6 +227,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
         /**
          * Decode json and get element to feed UI
+         *
          * @param result string with all student info
          */
         @Override
@@ -200,8 +244,8 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 tvDescription.setText(description.equals("null") ? "Pas de description" : description);
                 tvName.setText(student.getString("surname"));
                 String adjectives = student.getString("adj1") + " - " +
-                                    student.getString("adj2") + " - " +
-                                    student.getString("adj3");
+                        student.getString("adj2") + " - " +
+                        student.getString("adj3");
                 tvAdjectives.setText(adjectives);
                 String match = json.getString("match") + " match(s)";
                 tvMatch.setText(match);
@@ -227,45 +271,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
             }
         }
     }
-
-    public void openCamera(){
-        if (checkSelfPermission(Manifest.permission.CAMERA)
-                != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.CAMERA},
-                    MY_CAMERA_PERMISSION_CODE);
-        } else {
-            Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(cameraIntent, CAMERA_REQUEST);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == MY_CAMERA_PERMISSION_CODE) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
-                Intent cameraIntent = new
-                        Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(cameraIntent, CAMERA_REQUEST);
-            } else {
-                Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
-            }
-
-        }
-    }
-
-
-        protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-            if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
-                Bitmap photo = (Bitmap) data.getExtras().get("data");
-                imgProfile.setImageBitmap(photo);
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                photo.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object
-                imgArray = baos.toByteArray();
-                encodedImage = Base64.encodeToString(imgArray, Base64.DEFAULT);
-            }
-        }
 
 }
 

@@ -16,7 +16,6 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -27,9 +26,9 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class Signup extends AppCompatActivity {
 
-    public static final String LOGIN    = "fr81.signup.login";
-    public static final String PASSWD   = "fr81.signup.passwd";
-    public static final String YEAR     = "fr81.signup.year";
+    public static final String LOGIN = "fr81.signup.login";
+    public static final String PASSWD = "fr81.signup.passwd";
+    public static final String YEAR = "fr81.signup.year";
 
     private EditText etEmail;
     private EditText etPassword;
@@ -61,14 +60,13 @@ public class Signup extends AppCompatActivity {
                 else
                     year = "2";
 
-                if(c.checkEmail(mail) && c.checkPassword(password)){
+                if (c.checkEmail(mail) && c.checkPassword(password)) {
                     if (b.isOnline((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))) {
                         new Signup.AsyncSignup(mail, password, year).execute();
                     } else {
                         Toast.makeText(Signup.this, "No internet access", Toast.LENGTH_SHORT).show();
                     }
-                }
-                else{
+                } else {
                     Toast.makeText(Signup.this, "Mot de passe ou adresse mail non valide", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -81,7 +79,7 @@ public class Signup extends AppCompatActivity {
         private String passwd;
         private String year;
 
-        public AsyncSignup(String mail, String passwd, String year){
+        public AsyncSignup(String mail, String passwd, String year) {
             super();
             this.mail = mail;
             this.passwd = passwd;
@@ -115,17 +113,20 @@ public class Signup extends AppCompatActivity {
             return result;
         }
 
+        /**
+         * Pass atributes to RegistrationConfirmation class and launch intent
+         * @param result String echo from server
+         */
         @Override
         protected void onPostExecute(String result) {
             result.replace("\n", "");
-            if(result.equals("OK")){
+            if (result.equals("OK")) {
                 Intent i = new Intent(Signup.this, RegistrationConfirmation.class);
                 i.putExtra(Signup.LOGIN, mail);
                 i.putExtra(Signup.PASSWD, passwd);
                 i.putExtra(Signup.YEAR, year);
                 startActivity(i);
-            }
-            else
+            } else
                 Toast.makeText(Signup.this, "Une erreur est survenue...", Toast.LENGTH_LONG).show();
         }
     }

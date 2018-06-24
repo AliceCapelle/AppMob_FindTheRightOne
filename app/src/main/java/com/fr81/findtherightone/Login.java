@@ -17,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -25,8 +24,12 @@ import javax.net.ssl.HttpsURLConnection;
  * Class to make user log in app
  */
 // TODO: 09/05/2018 Write log in external file
-public class Login extends AppCompatActivity implements View.OnClickListener{
+public class Login extends AppCompatActivity implements View.OnClickListener {
 
+    private static final String PREFS_MAIL = "PREFS_MAIL";
+    private static final String PREFS_CO = "PREFS_CO";
+    private static final String PREFS = "PREFS";
+    SharedPreferences sharedPreferences;
     private EditText etEmail;
     private EditText etPassword;
     private String userMail;
@@ -36,10 +39,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     private Button buttonFP;
     private ImageView loginLogo;
     private BackendConnection b;
-    private static final String PREFS_MAIL = "PREFS_MAIL";
-    private static final String PREFS_CO = "PREFS_CO";
-    SharedPreferences sharedPreferences;
-    private static final String PREFS = "PREFS";
     private CheckBox cbStayConnected;
     private Boolean stayConnected = false;
     private String mail;
@@ -48,6 +47,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
      * Main UI thread. We set the view, and get the text entered when the button
      * is clicked. We launch an asynctask (a thread), who run in the background and connect to
      * database
+     *
      * @param savedInstanceState
      */
     @Override
@@ -69,7 +69,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         buttonHome.setOnClickListener(this);
         buttonSignUp.setOnClickListener(this);
         buttonFP.setOnClickListener(this);
-
 
 
     }
@@ -95,7 +94,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                 Intent signup = new Intent(this, Signup.class);
                 startActivity(signup);
                 break;
-            case R.id.bPwdForgot :
+            case R.id.bPwdForgot:
                 Intent forgotPwd = new Intent(this, PasswordForgotten.class);
                 startActivity(forgotPwd);
                 break;
@@ -103,10 +102,32 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     }
 
 
-
-
-
     /**********************************************************************************************/
+
+    /**
+     * Add shared preferences to phone in order to stay connected and store user.
+     * If there's nothing, we add user's email and connected token.
+     * If there's something, we clear the file and add the prefs.
+     */
+    public void insertSharedPref() {
+        if (!sharedPreferences.contains(PREFS_MAIL)) {
+            sharedPreferences
+                    .edit()
+                    .putString(PREFS_MAIL, userMail)
+                    .putBoolean(PREFS_CO, stayConnected)
+                    .apply();
+
+        } else {
+            getSharedPreferences(PREFS, 0).edit().clear().commit();
+            sharedPreferences
+                    .edit()
+                    .putString(PREFS_MAIL, userMail)
+                    .putBoolean(PREFS_CO, stayConnected)
+                    .apply();
+        }
+
+    }
+
     /**
      * Inner class who extend AsyncTask. Start a thread when called.
      */
@@ -115,6 +136,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         /**
          * First methode called when class is called. Performs task in the background.
          * Send a post request to our server, in order to login
+         *
          * @param params username and password entered by user
          * @return string of server answer.
          */
@@ -145,61 +167,30 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         /**
          * Method execute once doInBackground is done.
          * Does not require calling.
+         *
          * @param result Responce receive from the server, either "OK", "FIRST" or "FAIL"
          */
-        // TODO: 09/05/2018  if "OK", we launch swipe, if "FIRST", we lauch adj, if "FAIL", we display error
         @Override
         protected void onPostExecute(String result) {
             //Log.i("LOGIN", result);
             result.replace("\n", "");
-            if(result == null){
-                Toast.makeText(Login.this, "Server is doing sh*t (again)" , Toast.LENGTH_LONG).show();
+            if (result == null) {
+                Toast.makeText(Login.this, "Server is doing sh*t (again)", Toast.LENGTH_LONG).show();
             }
-            if(result.equals("OK")){
+            if (result.equals("OK") || result.equals("FIRST")) {
                 sharedPreferences = getBaseContext().getSharedPreferences(PREFS, MODE_PRIVATE);
-                if(cbStayConnected.isChecked())
+                if (cbStayConnected.isChecked())
                     stayConnected = true;
                 insertSharedPref();
                 Intent i = new Intent(Login.this, Swipe.class);
                 startActivity(i);
                 finish();
-            }
-            else if(result.equals("FAIL")){
-                Toast.makeText(Login.this, "Adresse mail ou mot de passe incorrect" , Toast.LENGTH_LONG).show();
-            }
-            else if(result.equals("FIRST")){
-                sharedPreferences = getBaseContext().getSharedPreferences(PREFS, MODE_PRIVATE);
-                if(cbStayConnected.isChecked())
-                    stayConnected = true;
-                insertSharedPref();
-                Intent i = new Intent(Login.this, StudentTest.class);
-                startActivity(i);
-                finish();
-            }
-            else{
-                Toast.makeText(Login.this, "Oops, le serveur à un probleme" , Toast.LENGTH_LONG).show();
+            } else if (result.equals("FAIL")) {
+                Toast.makeText(Login.this, "Adresse mail ou mot de passe incorrect", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(Login.this, "Oops, le serveur à un probleme", Toast.LENGTH_LONG).show();
             }
 
-        }
-
-    }
-
-    public void insertSharedPref(){
-        if (!sharedPreferences.contains(PREFS_MAIL)) {
-            sharedPreferences
-                    .edit()
-                    .putString(PREFS_MAIL, userMail)
-                    .putBoolean(PREFS_CO, stayConnected)
-                    .apply();
-
-        }
-        else{
-            getSharedPreferences(PREFS, 0).edit().clear().commit();
-            sharedPreferences
-                    .edit()
-                    .putString(PREFS_MAIL, userMail)
-                    .putBoolean(PREFS_CO, stayConnected)
-                    .apply();
         }
 
     }

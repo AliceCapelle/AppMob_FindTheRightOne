@@ -1,6 +1,5 @@
 package com.fr81.findtherightone;
 
-import android.app.Notification;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,13 +13,11 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
 
 /**
  * Fragment of the profile display in swipe
  */
-public class FragmentProfile extends Fragment implements View.OnClickListener{
+public class FragmentProfile extends Fragment implements View.OnClickListener {
 
     private TextView tvName;
     private TextView tvAdjs;
@@ -67,7 +64,7 @@ public class FragmentProfile extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.ivStudentPic:
                 Intent signup = new Intent(getActivity(), ProfileOtherUser.class);
                 signup.putExtra("mail", mail);

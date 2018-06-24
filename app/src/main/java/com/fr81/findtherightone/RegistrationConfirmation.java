@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,23 +16,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class RegistrationConfirmation extends AppCompatActivity implements  View.OnClickListener{
+/**
+ * Class to signup after user gave its info
+ */
+public class RegistrationConfirmation extends AppCompatActivity implements View.OnClickListener {
 
     protected String mail;
     protected String passwd;
     protected String year;
     protected TextView txtResult;
-    //ADD Tibo
     protected TextView tv_Confirmation;
     protected ImageView imgSign_up;
     protected Button bHome;
-    protected  Button bLogin;
+    protected Button bLogin;
     protected ProgressBar pBarRegistration;
-    //END
     private BackendConnection backend;
 
     @Override
@@ -41,8 +41,7 @@ public class RegistrationConfirmation extends AppCompatActivity implements  View
         setContentView(R.layout.activity_registration_confirmation);
 
         Intent i = getIntent();
-        //ADD Tibo
-        tv_Confirmation=findViewById(R.id.tv_Confirmation);
+        tv_Confirmation = findViewById(R.id.tv_Confirmation);
         imgSign_up = findViewById(R.id.imgSign_Up);
         pBarRegistration = findViewById(R.id.pBarRegistration);
         pBarRegistration.setVisibility(View.VISIBLE);
@@ -52,11 +51,10 @@ public class RegistrationConfirmation extends AppCompatActivity implements  View
         bLogin = findViewById(R.id.bLoginC);
         bHome.setOnClickListener(this);
         bLogin.setOnClickListener(this);
-        //END
-        txtResult = (TextView)findViewById(R.id.register_result);
-        mail    = i.getStringExtra(Signup.LOGIN);
-        passwd  = i.getStringExtra(Signup.PASSWD);
-        year    = i.getStringExtra(Signup.YEAR);
+        txtResult = findViewById(R.id.register_result);
+        mail = i.getStringExtra(Signup.LOGIN);
+        passwd = i.getStringExtra(Signup.PASSWD);
+        year = i.getStringExtra(Signup.YEAR);
 
         if (backend.isOnline((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))) {
             new RegistrationConfirmation.AsyncRegister().execute();
@@ -68,7 +66,7 @@ public class RegistrationConfirmation extends AppCompatActivity implements  View
 
     @Override
     public void onClick(View v) {
-        switch(v.getId()){
+        switch (v.getId()) {
             case R.id.bHomeC:
                 Intent intentH = new Intent(this, Home.class);
                 startActivity(intentH);
@@ -85,7 +83,8 @@ public class RegistrationConfirmation extends AppCompatActivity implements  View
     private class AsyncRegister extends AsyncTask<String, String, String> {
 
         /**
-         * Request server to add student to db and send email
+         * Request server to add student to db and send confirmation email
+         *
          * @param params mail, password and year
          * @return
          */
@@ -113,20 +112,24 @@ public class RegistrationConfirmation extends AppCompatActivity implements  View
             return result;
         }
 
+        /**
+         * Display success message in UI
+         *
+         * @param result
+         */
         @Override
         protected void onPostExecute(String result) {
             result.replace("\n", "");
-            if(result.equals("OK")) {
+            if (result.equals("OK")) {
                 Intent i = getIntent();
                 pBarRegistration.setVisibility(View.INVISIBLE);
                 txtResult.setVisibility(View.INVISIBLE);
-                String confirmation = "Un email de confirmation a été envoyé à "+
-                        i.getStringExtra(Signup.LOGIN)+"@etu.parisdescartes.fr";
+                String confirmation = "Un email de confirmation a été envoyé à " +
+                        i.getStringExtra(Signup.LOGIN) + "@etu.parisdescartes.fr";
                 tv_Confirmation.setText(confirmation);
                 tv_Confirmation.setVisibility(View.VISIBLE);
                 imgSign_up.setVisibility(View.VISIBLE);
-            }
-            else
+            } else
                 tv_Confirmation.setText("Une erreur est survenue...");
         }
     }
